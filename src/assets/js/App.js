@@ -20,48 +20,7 @@ window.addEventListener('popstate', App)
 export const globalState = {
   targetProduct: null,
   products: null,
-  categorias: [
-    {
-      id: 1,
-      nombre: 'Procesadores',
-      pathname: '/productos/procesadores',
-    },
-    {
-      id: 2,
-      nombre: 'Memorias RAM',
-      pathname: '/productos/memorias-ram',
-    },
-    {
-      id: 3,
-      nombre: 'Motherboards',
-      pathname: '/productos/motherboards',
-    },
-    {
-      id: 4,
-      nombre: 'Placas de Video',
-      pathname: '/productos/placas-de-video',
-    },
-    {
-      id: 5,
-      nombre: 'Almacenamiento',
-      pathname: '/productos/almacenamiento',
-    },
-    {
-      id: 6,
-      nombre: 'Fuentes',
-      pathname: '/productos/fuentes',
-    },
-    {
-      id: 7,
-      nombre: 'Gabinetes',
-      pathname: '/productos/gabinetes',
-    },
-    {
-      id: 8,
-      nombre: 'Refrigeración',
-      pathname: '/productos/refrigeracion',
-    },
-  ],
+  categorias: null,
 }
 
 export const router = new Router('http://localhost:8080')
