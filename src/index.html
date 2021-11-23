@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoonGamers</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__container container">
+        <section class="header__section header__section--1">
+          <a class="header__logo" href="/"
+            ><h1 class="header__logo heading-1">MoonGamers</h1></a
+          >
+          <form class="header__searchform">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              class="header__searchinput"
+              placeholder="Buscar"
+            />
+            <button type="submit" class="header__searchsubmit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+          <div class="header__icons">
+            <button class="btn header__button">
+              <i class="far fa-user"></i>
+            </button>
+            <button class="btn header__button">
+              <i class="fas fa-shopping-cart"></i>
+            </button>
+          </div>
+        </section>
+        <section class="header__section header__section--2">
+          <nav class="header__nav" id="nav-main">
+            <ul class="header__navlist">
+              <li class="header__navitem header__navitem--dropdown">
+                <a href="#" class="header__navlink header__navlink--dropdown"
+                  >Hardware <i class="fas fa-chevron-down"></i
+                ></a>
+                <ul class="header__navlist header__navlist--dropdown">
+                  <li>
+                    <a
+                      class="header__navlink"
+                      href="/productos/procesadores"
+                      data-id="1"
+                      >Procesadores</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="header__navlink"
+                      href="/productos/memorias-ram"
+                      data-id="2"
+                      >Memorias RAM</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="header__navlink"
+                      href="/productos/motherboards"
+                      data-id="3"
+                      >Motherboards</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="header__navlink"
+                      href="/productos/placas-de-video"
+                      data-id="4"
+                      >Placas de Video</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="header__navlink"
+                      href="/productos/almacenamiento"
+                      data-id="5"
+                      >Almacenamiento</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="header__navlink"
+                      href="/productos/fuentes"
+                      data-id="6"
+                      >Fuentes</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="header__navlink"
+                      href="/productos/gabinetes"
+                      data-id="7"
+                      >Gabinetes</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="header__navlink"
+                      href="/productos/refrigeracion"
+                      data-id="8"
+                      >Refrigeración</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="header__navitem">
+                <a href="/productos/perifericos" class="header__navlink"
+                  >Periféricos</a
+                >
+              </li>
+              <li class="header__navitem">
+                <a href="/productos/monitores" class="header__navlink"
+                  >Monitores</a
+                >
+              </li>
+              <li class="header__navitem">
+                <a href="/productos/notebooks" class="header__navlink"
+                  >Notebooks</a
+                >
+              </li>
+              <li class="header__navitem">
+                <a href="/productos/playstation" class="header__navlink"
+                  >Playstation</a
+                >
+              </li>
+              <li class="header__navitem">
+                <a href="/productos/ofertas" class="header__navlink">Ofertas</a>
+              </li>
+            </ul>
+          </nav>
+        </section>
+      </div>
+    </header>
+    <main id="main"></main>
+    <footer class="footer">
+      <div class="footer__section footer__section--1">
+        <div class="footer__section-container container">
+          <div class="footer__area">
+            <h3 class="footer__subtitle">Información</h3>
+            <ul class="footer__list">
+              <li class="footer__list-item navlink"><a href="/">Inicio</a></li>
+              <li class="footer__list-item"><a href="#">Cómo Comprar</a></li>
+              <li class="footer__list-item">
+                <a href="#">Preguntas Frecuentes</a>
+              </li>
+              <li class="footer__list-item"><a href="#">Quiénes Somos</a></li>
+            </ul>
+          </div>
+          <div class="footer__area">
+            <h3 class="footer__subtitle">Contacto</h3>
+            <ul class="footer__list">
+              <li class="footer__list-item footer__list-item--contact">
+                <i class="fab fa-whatsapp"></i><a href="#">+5491199999999</a>
+              </li>
+              <li class="footer__list-item footer__list-item--contact">
+                <i class="far fa-envelope"></i>
+                <a href="#">compras@moongamers.com.ar</a>
+              </li>
+              <li class="footer__list-item footer__list-item--contact">
+                <i class="fas fa-map-marker-alt"></i
+                ><a href="#">Av Lorem Ipsum 999 - CABA</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer__area">
+            <h3 class="footer__subtitle">Redes Sociales</h3>
+            <ul class="footer__list footer__list--inline">
+              <li class="footer__list-item footer__list-item--social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li class="footer__list-item footer__list-item--social">
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+              </li>
+              <li class="footer__list-item footer__list-item--social">
+                <a href="#"><i class="fab fa-youtube"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__section footer__section--2">
+        <div class="container">
+          <p>Copyright MoonGamers - 2021. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
