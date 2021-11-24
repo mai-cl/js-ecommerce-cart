@@ -37,6 +37,14 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+
+  @include respond(md-screen) {
+    font-size: 58%;
+  }
+
+  @include respond(sm-screen) {
+    font-size: 50%;
+  }
 }
 
 body {

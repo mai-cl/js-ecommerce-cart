@@ -1,6 +1,84 @@
 .header {
   background-color: var(--color-primary);
 
+  @include respond(md-screen) {
+    height: 8.2rem;
+    position: sticky;
+    top: 0;
+  }
+
+  &__responsive-section {
+    display: none;
+    background-color: var(--color-primary-dark);
+    position: fixed;
+    top: 8.2rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &.show {
+      @include respond(md-screen) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  &__responsive-back-btn {
+    font-size: 3rem;
+    color: var(--color-grey-light-1);
+    position: absolute;
+    top: 3.2rem;
+    left: 3.2rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+  }
+
+  &__responsive-navlist {
+    font-size: 3rem;
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+
+    &.active {
+      display: flex;
+    }
+  }
+
+  &__responsive-navlink {
+    color: var(--color-grey-light-1);
+
+    &:link,
+    &:visited {
+      text-decoration: none;
+    }
+
+    &--hasitems {
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  &__menu-btn-resp {
+    display: none;
+    background-color: transparent;
+    border: none;
+    color: var(--color-grey-light-1);
+    cursor: pointer;
+    font-size: 2.4rem;
+    margin-right: 1.6rem;
+    padding: 0.8rem;
+
+    @include respond(md-screen) {
+      display: block;
+    }
+  }
+
   &__logo {
     text-decoration: none;
   }
@@ -8,33 +86,62 @@
   &__container {
     display: flex;
     flex-direction: column;
-    padding-top: 1.2rem;
-    gap: 1.2rem;
-    position: relative;
+
+    @include respond(sm-screen) {
+      padding: 0 1.2rem;
+    }
   }
 
   &__section {
     display: flex;
 
     &--1 {
+      padding: 1.2rem 0;
       justify-content: space-between;
       align-items: center;
-      gap: 3rem;
+
+      @include respond(md-screen) {
+        justify-content: flex-start;
+      }
     }
 
     &--2 {
       justify-content: center;
+
+      @include respond(md-screen) {
+        display: none;
+      }
+
+      /* @include respond(md-screen) {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        min-height: calc(100vh - 8.2rem);
+        background-color: var(--color-primary-dark);
+      } */
+
+      /* &.show {
+        @include respond(md-screen) {
+          display: block;
+        }
+      } */
     }
   }
 
   &__searchform {
     position: relative;
+
+    @include respond(md-screen) {
+      display: none;
+    }
   }
 
   &__searchinput {
     border-radius: 0.5rem;
     height: 4.2rem;
-    width: 40rem;
+    width: 34rem;
     border: none;
     padding: 0.4rem 1.2rem;
   }
@@ -55,6 +162,14 @@
     display: flex;
     gap: 2.4rem;
 
+    /* @include respond(md-screen) {
+      padding-top: 2.4rem;
+      flex-direction: column;
+      gap: 1.6rem;
+      justify-content: center;
+      align-items: center;
+    } */
+
     &--dropdown {
       display: none;
       position: absolute;
@@ -64,6 +179,13 @@
       padding: 0rem 2.4rem;
       flex-direction: column;
       gap: 0;
+
+      /* @include respond(md-screen) {
+        position: static;
+        padding-top: 1.6rem;
+        flex-direction: column;
+        gap: 1.6rem;
+      } */
     }
   }
 
@@ -82,13 +204,21 @@
     padding: 1.2rem 0;
     text-decoration: none;
     color: var(--color-grey-light-1);
+
+    /* @include respond(md-screen) {
+      padding: 0.8rem 0;
+    } */
   }
 
   &__icons {
     display: flex;
     gap: 2.4rem;
-    font-size: 1.8rem;
     color: var(--color-grey-light-1);
+
+    @include respond(md-screen) {
+      margin-left: auto;
+      gap: 1.6rem;
+    }
   }
 
   &__button {
@@ -96,5 +226,18 @@
     padding: 0;
     font-size: 1.8rem;
     color: var(--color-grey-light-1);
+
+    @include respond(md-screen) {
+      font-size: 2rem;
+      padding: 0.4rem;
+    }
+
+    &--search-resp {
+      display: none;
+
+      @include respond(md-screen) {
+        display: block;
+      }
+    }
   }
 }

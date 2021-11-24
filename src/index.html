@@ -17,6 +17,9 @@
     <header class="header">
       <div class="header__container container">
         <section class="header__section header__section--1">
+          <button class="header__menu-btn-resp">
+            <i class="fas fa-bars"></i>
+          </button>
           <a class="header__logo" href="/"
             ><h1 class="header__logo heading-1">MoonGamers</h1></a
           >
@@ -33,6 +36,9 @@
             </button>
           </form>
           <div class="header__icons">
+            <button class="btn header__button header__button--search-resp">
+              <i class="fas fa-search"></i>
+            </button>
             <button class="btn header__button">
               <i class="far fa-user"></i>
             </button>
@@ -41,6 +47,125 @@
             </button>
           </div>
         </section>
+
+        <section class="header__responsive-section">
+          <button class="header__responsive-back-btn">
+            <i class="fas fa-long-arrow-alt-left"></i>
+          </button>
+          <nav class="header__responsive-nav">
+            <ul class="header__responsive-navlist active" id="home-links">
+              <li class="header__responsive-navitem">
+                <button
+                  class="
+                    header__responsive-navlink
+                    header__responsive-navlink--hasitems
+                  "
+                  data-items="hardware-links"
+                >
+                  Hardware <i class="fas fa-long-arrow-alt-right"></i>
+                </button>
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/perifericos"
+                  >Periféricos</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/monitores"
+                  >Monitores</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/notebooks"
+                  >Notebooks</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/playstation"
+                  >Playstation</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/ofertas"
+                  >Ofertas</a
+                >
+              </li>
+            </ul>
+            <ul
+              class="header__responsive-navlist"
+              id="hardware-links"
+              data-back="home-links"
+            >
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/procesadores"
+                  >Procesadores</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/memorias-ram"
+                  >Memorias RAM</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/motherboards"
+                  >Motherboards</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/placas-de-video"
+                  >Placas De Video</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/almacenamiento"
+                  >Almacenamiento</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/fuentes"
+                  >Fuentes</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/fuentes"
+                  >Gabinetes</a
+                >
+              </li>
+              <li class="header__responsive-navitem">
+                <a
+                  class="header__responsive-navlink navlink"
+                  href="/productos/refrigeracion"
+                  >Refrigeración
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </section>
+
         <section class="header__section header__section--2">
           <nav class="header__nav" id="nav-main">
             <ul class="header__navlist">
@@ -143,7 +268,9 @@
         </section>
       </div>
     </header>
+
     <main id="main"></main>
+
     <footer class="footer">
       <div class="footer__section footer__section--1">
         <div class="footer__section-container container">

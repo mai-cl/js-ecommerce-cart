@@ -4,6 +4,14 @@ import { producto } from './pages/productoController'
 import Router from './Router'
 
 export const $content = document.getElementById('main')
+const $menuBtnResp = document.querySelector('.header__menu-btn-resp')
+const $headerRespNav = document.querySelector('.header__responsive-section')
+const $body = document.body
+const $submenuResponsiveBtns = document.querySelectorAll(
+  '.header__responsive-navlink--hasitems'
+)
+const $backNavlistBtn = document.querySelector('.header__responsive-back-btn')
+const $mainNavlist = document.getElementById('home-links')
 
 document.addEventListener('click', e => {
   if (!e.target.matches('.header__navlink, .navlink, .navlink *')) return
@@ -11,8 +19,40 @@ document.addEventListener('click', e => {
   const anchor = e.target.closest('a')
   history.pushState({}, '', anchor.href)
   console.log(anchor.href)
+  $headerRespNav.classList.remove('show')
+  const activeNavlist = document.querySelector(
+    '.header__responsive-navlist.active'
+  )
+  activeNavlist.classList.remove('active')
+  $mainNavlist.classList.add('active')
   const navEvent = new PopStateEvent('popstate')
   window.dispatchEvent(navEvent)
+})
+
+$menuBtnResp.addEventListener('click', () => {
+  $headerRespNav.classList.toggle('show')
+})
+
+$submenuResponsiveBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const activeNavlist = document.querySelector(
+      '.header__responsive-navlist.active'
+    )
+    const newNavlist = document.getElementById(`${btn.dataset.items}`)
+    activeNavlist.classList.remove('active')
+    newNavlist.classList.add('active')
+  })
+})
+
+$backNavlistBtn.addEventListener('click', () => {
+  const activeNavlist = document.querySelector(
+    '.header__responsive-navlist.active'
+  )
+  const newNavlist = document.getElementById(`${activeNavlist.dataset.back}`)
+
+  if (!newNavlist) return $headerRespNav.classList.toggle('show')
+  activeNavlist.classList.remove('active')
+  newNavlist.classList.add('active')
 })
 
 window.addEventListener('popstate', App)
