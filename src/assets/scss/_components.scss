@@ -129,7 +129,14 @@
 // ERROR 404
 .section-error {
   padding: 3.2rem 0;
-  min-height: 33.5rem;
+  min-height: calc(100vh - 13.2rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include respond(md-screen) {
+    min-height: calc(100vh - 8.2rem);
+  }
 
   &__img {
     margin: 0 auto;
@@ -183,14 +190,14 @@
 
 // LOADER SPINNER
 .loader-spinner {
-  min-height: 33.9rem;
+  min-height: calc(100vh - 13.2rem);
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
   @include respond(md-screen) {
-    min-height: 37.9rem;
+    min-height: calc(100vh - 8.2rem);
   }
 
   .lds-ring {

@@ -86,6 +86,13 @@
   &__container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    min-height: 13.2rem;
+
+    @include respond(md-screen) {
+      display: block;
+      min-height: auto;
+    }
 
     @include respond(sm-screen) {
       padding: 0 1.2rem;
@@ -102,6 +109,7 @@
 
       @include respond(md-screen) {
         justify-content: flex-start;
+        min-height: 8.2rem;
       }
     }
 
@@ -111,22 +119,6 @@
       @include respond(md-screen) {
         display: none;
       }
-
-      /* @include respond(md-screen) {
-        display: none;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 100%;
-        min-height: calc(100vh - 8.2rem);
-        background-color: var(--color-primary-dark);
-      } */
-
-      /* &.show {
-        @include respond(md-screen) {
-          display: block;
-        }
-      } */
     }
   }
 
@@ -162,14 +154,6 @@
     display: flex;
     gap: 2.4rem;
 
-    /* @include respond(md-screen) {
-      padding-top: 2.4rem;
-      flex-direction: column;
-      gap: 1.6rem;
-      justify-content: center;
-      align-items: center;
-    } */
-
     &--dropdown {
       display: none;
       position: absolute;
@@ -179,13 +163,6 @@
       padding: 0rem 2.4rem;
       flex-direction: column;
       gap: 0;
-
-      /* @include respond(md-screen) {
-        position: static;
-        padding-top: 1.6rem;
-        flex-direction: column;
-        gap: 1.6rem;
-      } */
     }
   }
 
@@ -204,10 +181,7 @@
     padding: 1.2rem 0;
     text-decoration: none;
     color: var(--color-grey-light-1);
-
-    /* @include respond(md-screen) {
-      padding: 0.8rem 0;
-    } */
+    cursor: pointer;
   }
 
   &__icons {

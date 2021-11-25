@@ -66,12 +66,12 @@
 
 .section-categoria,
 .section-busqueda {
-  min-height: 33.9rem;
+  min-height: calc(100vh - 13.2rem);
   padding: 3.2rem 0;
   background-color: var(--color-grey-light-2);
 
   @include respond(md-screen) {
-    min-height: 37.9rem;
+    min-height: calc(100vh - 8.2rem);
   }
 
   &__breadcrumbs {
