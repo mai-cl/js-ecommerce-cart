@@ -37,6 +37,7 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  height: 100%;
 
   @include respond(md-screen) {
     font-size: 58%;
@@ -60,4 +61,12 @@ body {
   max-width: 120rem;
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+#main {
+  min-height: 33.9rem;
+
+  @include respond(md-screen) {
+    min-height: 37.9rem;
+  }
 }

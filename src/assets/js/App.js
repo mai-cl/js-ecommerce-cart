@@ -1,3 +1,4 @@
+import LoaderSpinner from './components/LoaderSpinner'
 import { categoria } from './pages/categoriaController'
 import { home } from './pages/homeController'
 import { producto } from './pages/productoController'
@@ -70,6 +71,7 @@ router.setRoute('/productos', producto, 2)
 
 function App() {
   window.scrollTo(0, 0)
+  $content.innerHTML = LoaderSpinner()
   router.goTo(location.pathname)
 }
 
