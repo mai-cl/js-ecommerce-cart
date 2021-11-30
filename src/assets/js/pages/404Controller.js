@@ -1,4 +1,4 @@
-import { $content } from '../App'
+import { $content } from '../controller'
 import Error404 from '../components/404Error'
 
 export const error404 = async () => {

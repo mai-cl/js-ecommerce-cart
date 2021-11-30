@@ -1,13 +1,13 @@
-import { globalState, router, $content } from '../App'
-import Banner from '../components/Banner'
-import ProductosDestacados from '../components/ProductosDestacados'
-import bannerImg from '../../img/banner.jpg'
+import { globalState } from '../controller'
 import { getProducts } from '../api/Api'
+import bannerView from '../views/bannerView'
+import productosDestacadosView from '../views/productosDestacadosView'
+import loaderSpinnerView from '../views/loaderSpinnerView'
 
 export const home = async () => {
-  let homeMarkup = ''
-  homeMarkup += new Banner([bannerImg]).markup()
+  loaderSpinnerView.render()
   globalState.products = await getProducts()
-  homeMarkup += new ProductosDestacados('Destacados').markup()
-  $content.innerHTML = homeMarkup
+  loaderSpinnerView.remove()
+  bannerView.render()
+  productosDestacadosView.render(globalState.products)
 }

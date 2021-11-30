@@ -1,5 +1,5 @@
 import ProductoCard from './ProductoCard'
-import { globalState } from '../App'
+import { globalState } from '../controller'
 
 export default class ProductosDestacados {
   constructor(title) {

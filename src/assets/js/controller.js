@@ -56,7 +56,7 @@ $backNavlistBtn.addEventListener('click', () => {
   newNavlist.classList.add('active')
 })
 
-window.addEventListener('popstate', App)
+window.addEventListener('popstate', app)
 
 export const globalState = {
   targetProduct: null,
@@ -69,10 +69,10 @@ router.setRoute('/', home)
 router.setRoute('/productos', categoria, 1)
 router.setRoute('/productos', producto, 2)
 
-function App() {
+function app() {
   window.scrollTo(0, 0)
-  $content.innerHTML = LoaderSpinner()
+  //$content.innerHTML = LoaderSpinner()
   router.goTo(location.pathname)
 }
 
-export default App
+export default app

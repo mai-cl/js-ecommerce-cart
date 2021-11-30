@@ -1,4 +1,4 @@
-import { $content } from '../App'
+import { $content } from '../controller'
 import { getProductByPathparam } from '../api/Api'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { error404 } from './404Controller'
