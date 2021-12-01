@@ -1,4 +1,4 @@
-import { error404 } from './pages/404Controller'
+import error404View from './views/error404View'
 
 export default class Router {
   constructor(origin) {
@@ -33,7 +33,7 @@ export default class Router {
       route.pageController()
     } else {
       console.log('not found')
-      error404()
+      error404View.render()
     }
   }
 

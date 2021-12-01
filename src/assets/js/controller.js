@@ -1,13 +1,11 @@
-import LoaderSpinner from './components/LoaderSpinner'
-import { categoria } from './pages/categoriaController'
-import { home } from './pages/homeController'
-import { producto } from './pages/productoController'
+import { categoria } from './controllers/categoriaController'
+import { home } from './controllers/homeController'
+import { producto } from './controllers/productoController'
 import Router from './Router'
 
 export const $content = document.getElementById('main')
 const $menuBtnResp = document.querySelector('.header__menu-btn-resp')
 const $headerRespNav = document.querySelector('.header__responsive-section')
-const $body = document.body
 const $submenuResponsiveBtns = document.querySelectorAll(
   '.header__responsive-navlink--hasitems'
 )
@@ -71,7 +69,6 @@ router.setRoute('/productos', producto, 2)
 
 function app() {
   window.scrollTo(0, 0)
-  //$content.innerHTML = LoaderSpinner()
   router.goTo(location.pathname)
 }
 
