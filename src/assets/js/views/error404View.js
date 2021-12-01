@@ -2,9 +2,7 @@ import error404img from '../../img/404.png'
 
 class Error404View {
   render() {
-    document
-      .getElementById('main')
-      .insertAdjacentHTML('beforeend', this.#generateMarkup())
+    document.getElementById('main').innerHTML = this.#generateMarkup()
   }
 
   #generateMarkup() {

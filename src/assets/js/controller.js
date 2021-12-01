@@ -62,14 +62,27 @@ export const globalState = {
   categorias: null,
 }
 
-export const router = new Router('http://localhost:8080')
-router.setRoute('/', home)
-router.setRoute('/productos', categoria, 1)
-router.setRoute('/productos', producto, 2)
+Router.setRoute('/', home)
+
+const categoriesPathnames = [
+  '/productos/procesadores',
+  '/productos/motherboards',
+  '/productos/memorias-ram',
+  '/productos/almacenamiento',
+  '/productos/placas-de-video',
+  '/productos/fuentes',
+  '/productos/gabinetes',
+  '/productos/refrigeracion',
+]
+
+categoriesPathnames.forEach(catPathname => {
+  Router.setRoute(catPathname, categoria)
+  Router.setRoute(catPathname, producto, true)
+})
 
 function app() {
   window.scrollTo(0, 0)
-  router.goTo(location.pathname)
+  Router.goTo(location.pathname)
 }
 
 export default app

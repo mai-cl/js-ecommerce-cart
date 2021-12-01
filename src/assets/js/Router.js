@@ -1,45 +1,36 @@
 import error404View from './views/error404View'
 
-export default class Router {
-  constructor(origin) {
-    this.host = origin
+class Router {
+  constructor() {
     this.routes = []
   }
 
-  setRoute(pathname, pageController, cantPathParams = 0) {
+  setRoute(pathname, pageController, hasPathParam = false) {
     const newRoute = {
       pathname,
       pageController,
-      cantPathParams,
+      hasPathParam,
     }
     this.routes.push(newRoute)
   }
 
   goTo(pathname) {
     let route = this.routes.find(route => route.pathname === pathname)
-    if (route) {
-      return route.pageController()
-    }
 
-    console.log(pathname)
+    if (route) return route.pageController()
 
-    route = this.routes.find(
-      route =>
-        pathname.startsWith(route.pathname) &&
-        route.cantPathParams === this.cantPathParams(pathname)
+    let routeWithPathParam = this.routes.find(
+      route => pathname.startsWith(route.pathname) && route.hasPathParam
     )
 
-    if (route) {
-      route.pageController()
-    } else {
-      console.log('not found')
-      error404View.render()
-    }
+    routeWithPathParam
+      ? routeWithPathParam.pageController(this.getPathParam(pathname))
+      : error404View.render()
   }
 
-  cantPathParams(pathname) {
-    return pathname.split('/').slice(2).length
+  getPathParam(pathname) {
+    return pathname.split('/').reverse()[0]
   }
 }
 
-function generatePathParams(pathname) {}
+export default new Router()
