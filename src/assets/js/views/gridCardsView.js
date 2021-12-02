@@ -7,8 +7,8 @@ function gridCardsView(data) {
         <div class="itemcard">
           <a class="itemcard__img navlink" href="${item.categoria.pathname}/${item.pathParam}">
             <img
-              src=${item.urlImage}
-              alt=${item.nombre}
+              src="${item.urlImage}"
+              alt="${item.nombre}"
             />
           </a>
           <div class="itemcard__body">

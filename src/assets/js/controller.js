@@ -1,65 +1,20 @@
 import { categoria } from './controllers/categoriaController'
 import { home } from './controllers/homeController'
 import { producto } from './controllers/productoController'
+import headerView from './views/headerView'
+import mainView from './views/mainView'
+import footerView from './views/footerView'
 import Router from './Router'
 
-export const $content = document.getElementById('main')
-const $menuBtnResp = document.querySelector('.header__menu-btn-resp')
-const $headerRespNav = document.querySelector('.header__responsive-section')
-const $submenuResponsiveBtns = document.querySelectorAll(
-  '.header__responsive-navlink--hasitems'
-)
-const $backNavlistBtn = document.querySelector('.header__responsive-back-btn')
-const $mainNavlist = document.getElementById('home-links')
-
-document.addEventListener('click', e => {
-  if (!e.target.matches('.header__navlink, .navlink, .navlink *')) return
+function onNavlinkClick(e) {
+  console.log('click', e.target)
+  if (!e.target.matches('a.header__navlink, a.navlink, a.navlink *')) return
   e.preventDefault()
   const anchor = e.target.closest('a')
   history.pushState({}, '', anchor.href)
-  console.log(anchor.href)
-  $headerRespNav.classList.remove('show')
-  const activeNavlist = document.querySelector(
-    '.header__responsive-navlist.active'
-  )
-  activeNavlist.classList.remove('active')
-  $mainNavlist.classList.add('active')
-  const navEvent = new PopStateEvent('popstate')
-  window.dispatchEvent(navEvent)
-})
-
-$menuBtnResp.addEventListener('click', () => {
-  $headerRespNav.classList.toggle('show')
-})
-
-$submenuResponsiveBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const activeNavlist = document.querySelector(
-      '.header__responsive-navlist.active'
-    )
-    const newNavlist = document.getElementById(`${btn.dataset.items}`)
-    activeNavlist.classList.remove('active')
-    newNavlist.classList.add('active')
-  })
-})
-
-$backNavlistBtn.addEventListener('click', () => {
-  const activeNavlist = document.querySelector(
-    '.header__responsive-navlist.active'
-  )
-  const newNavlist = document.getElementById(`${activeNavlist.dataset.back}`)
-
-  if (!newNavlist) return $headerRespNav.classList.toggle('show')
-  activeNavlist.classList.remove('active')
-  newNavlist.classList.add('active')
-})
-
-window.addEventListener('popstate', app)
-
-export const globalState = {
-  targetProduct: null,
-  products: null,
-  categorias: null,
+  headerView.hideResponsiveNav()
+  headerView.resetResponsiveNav()
+  Router.dispatchNavEvent()
 }
 
 Router.setRoute('/', home)
@@ -84,5 +39,14 @@ function app() {
   window.scrollTo(0, 0)
   Router.goTo(location.pathname)
 }
+
+function setInitialHandlers() {
+  window.addEventListener('popstate', app)
+  headerView.addHandler('click', onNavlinkClick)
+  mainView.addHandler('click', onNavlinkClick)
+  footerView.addHandler('click', onNavlinkClick)
+}
+
+setInitialHandlers()
 
 export default app

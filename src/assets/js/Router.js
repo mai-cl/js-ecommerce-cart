@@ -31,6 +31,11 @@ class Router {
   getPathParam(pathname) {
     return pathname.split('/').reverse()[0]
   }
+
+  dispatchNavEvent() {
+    const navEvent = new PopStateEvent('popstate')
+    window.dispatchEvent(navEvent)
+  }
 }
 
 export default new Router()
