@@ -5,6 +5,13 @@ const submenuResponsiveBtns = document.querySelectorAll(
 )
 const backNavlistBtn = document.querySelector('.header__responsive-back-btn')
 const mainNavlist = document.getElementById('home-links')
+const openSearchFormBtn = document.querySelector('.header__button--search-resp')
+const closeSearchFormBtn = document.querySelector(
+  '.header__searchform-close-btn-resp'
+)
+const searchSectionResp = document.querySelector(
+  '.header__searchform-section-resp'
+)
 
 function addHandler(event, handler) {
   document.querySelector('header').addEventListener(event, handler)
@@ -46,6 +53,16 @@ function setUIhandlers() {
     if (!newNavlist) return hideResponsiveNav()
     activeNavlist.classList.remove('active')
     newNavlist.classList.add('active')
+  })
+
+  openSearchFormBtn.addEventListener('click', e => {
+    searchSectionResp.classList.add('show')
+    hideResponsiveNav()
+    resetResponsiveNav()
+  })
+
+  closeSearchFormBtn.addEventListener('click', () => {
+    searchSectionResp.classList.remove('show')
   })
 }
 

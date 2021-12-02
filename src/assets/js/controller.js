@@ -5,9 +5,9 @@ import headerView from './views/headerView'
 import mainView from './views/mainView'
 import footerView from './views/footerView'
 import Router from './Router'
+import { search } from './controllers/searchController'
 
 function onNavlinkClick(e) {
-  console.log('click', e.target)
   if (!e.target.matches('a.header__navlink, a.navlink, a.navlink *')) return
   e.preventDefault()
   const anchor = e.target.closest('a')
@@ -18,6 +18,7 @@ function onNavlinkClick(e) {
 }
 
 Router.setRoute('/', home)
+Router.setRoute('/search', search)
 
 const categoriesPathnames = [
   '/productos/procesadores',
@@ -43,10 +44,19 @@ function app() {
 function setInitialHandlers() {
   window.addEventListener('popstate', app)
   headerView.addHandler('click', onNavlinkClick)
+  headerView.addHandler('submit', onSubmitForm)
   mainView.addHandler('click', onNavlinkClick)
   footerView.addHandler('click', onNavlinkClick)
 }
 
 setInitialHandlers()
+
+function onSubmitForm(e) {
+  e.preventDefault()
+  const form = e.target
+  const inputValue = form.search.value
+  history.pushState({}, '', `/search?query=${inputValue}`)
+  Router.dispatchNavEvent()
+}
 
 export default app

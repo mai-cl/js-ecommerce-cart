@@ -26,6 +26,12 @@
   &__title {
     margin-bottom: 2.4rem;
   }
+
+  min-height: calc(100vh - 13.2rem);
+
+  @include respond(md-screen) {
+    min-height: calc(100vh - 8.2rem);
+  }
 }
 
 // GRID PRODUCTOS

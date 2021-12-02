@@ -4,6 +4,7 @@ import productoView from '../views/productoView'
 import error404View from '../views/error404View'
 
 export const producto = async pathParam => {
+  console.log(pathParam)
   loaderSpinnerView.render()
   await model.getProductByPathparam(pathParam)
   loaderSpinnerView.remove()

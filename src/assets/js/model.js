@@ -20,6 +20,13 @@ async function getProductsByCategory(categoriaId) {
   state.products = data
 }
 
+async function getProductsByQuery(query) {
+  const data = await getJSON(
+    `${API_URL}/productos?q=${query}&_expand=categoria`
+  )
+  state.products = data
+}
+
 async function getCategories() {
   const data = await getJSON(`${API_URL}/categorias`)
   state.categorias = data
@@ -45,4 +52,5 @@ export default {
   getProductByPathparam,
   getProducts,
   getProductsByCategory,
+  getProductsByQuery,
 }
