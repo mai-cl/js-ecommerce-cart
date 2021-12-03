@@ -106,7 +106,7 @@
   }
 
   &__menu-btn-resp {
-    display: block;
+    display: none;
     background-color: transparent;
     border: none;
     color: var(--color-grey-light-1);
@@ -114,6 +114,10 @@
     font-size: 2.4rem;
     margin-right: 1.6rem;
     padding: 0.8rem;
+
+    @include respond(md-screen) {
+      display: block;
+    }
   }
 
   &__logo {
