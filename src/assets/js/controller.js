@@ -55,6 +55,7 @@ function onSubmitForm(e) {
   e.preventDefault()
   const form = e.target
   const inputValue = form.search.value
+  form.search.blur()
   history.pushState({}, '', `/search?query=${inputValue}`)
   Router.dispatchNavEvent()
 }

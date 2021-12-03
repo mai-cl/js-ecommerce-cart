@@ -16,12 +16,12 @@
   <body>
     <header class="header">
       <div class="header__container container">
-        <section class="header__searchform-section-resp">
+        <section class="header__search-section-resp">
           <div class="container">
-            <button class="header__searchform-close-btn-resp">
+            <button class="header__menu-btn-resp" id="close-form-btn">
               <i class="fas fa-times"></i>
             </button>
-            <form class="header__searchform-resp">
+            <form class="header__searchform header__searchform--resp">
               <input
                 type="text"
                 name="search"
@@ -35,8 +35,9 @@
             </form>
           </div>
         </section>
+
         <section class="header__section header__section--1">
-          <button class="header__menu-btn-resp">
+          <button class="header__menu-btn-resp" id="open-menu-btn">
             <i class="fas fa-bars"></i>
           </button>
           <a class="header__logo" href="/"

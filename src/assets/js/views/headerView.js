@@ -1,4 +1,4 @@
-const menuBtnResp = document.querySelector('.header__menu-btn-resp')
+const menuBtnResp = document.getElementById('open-menu-btn')
 const headerRespNav = document.querySelector('.header__responsive-section')
 const submenuResponsiveBtns = document.querySelectorAll(
   '.header__responsive-navlink--hasitems'
@@ -6,12 +6,8 @@ const submenuResponsiveBtns = document.querySelectorAll(
 const backNavlistBtn = document.querySelector('.header__responsive-back-btn')
 const mainNavlist = document.getElementById('home-links')
 const openSearchFormBtn = document.querySelector('.header__button--search-resp')
-const closeSearchFormBtn = document.querySelector(
-  '.header__searchform-close-btn-resp'
-)
-const searchSectionResp = document.querySelector(
-  '.header__searchform-section-resp'
-)
+const closeSearchFormBtn = document.getElementById('close-form-btn')
+const searchSectionResp = document.querySelector('.header__search-section-resp')
 
 function addHandler(event, handler) {
   document.querySelector('header').addEventListener(event, handler)
@@ -55,8 +51,9 @@ function setUIhandlers() {
     newNavlist.classList.add('active')
   })
 
-  openSearchFormBtn.addEventListener('click', e => {
+  openSearchFormBtn.addEventListener('click', () => {
     searchSectionResp.classList.add('show')
+    searchSectionResp.querySelector('form .header__searchinput').focus()
     hideResponsiveNav()
     resetResponsiveNav()
   })
