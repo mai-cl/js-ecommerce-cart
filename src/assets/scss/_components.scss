@@ -1,4 +1,4 @@
-// BUTTONS
+// BUTTON
 .btn {
   cursor: pointer;
   border: none;
@@ -15,22 +15,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-}
-
-// SECCIÓN DESTACADOS
-.section-destacados {
-  padding: 4.8rem 0;
-  background-color: var(--color-grey-light-2);
-
-  &__title {
-    margin-bottom: 2.4rem;
-  }
-
-  min-height: calc(100vh - 13.2rem);
-
-  @include respond(md-screen) {
-    min-height: calc(100vh - 8.2rem);
   }
 }
 
@@ -129,34 +113,6 @@
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
-  }
-}
-
-// ERROR 404
-.section-error {
-  padding: 3.2rem 0;
-  min-height: calc(100vh - 13.2rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @include respond(md-screen) {
-    min-height: calc(100vh - 8.2rem);
-  }
-
-  &__img {
-    margin: 0 auto;
-    width: 34rem;
-    margin-bottom: 1.6rem;
-    img {
-      display: block;
-      width: 100%;
-    }
-  }
-
-  &__message {
-    font-weight: 500;
-    text-align: center;
   }
 }
 

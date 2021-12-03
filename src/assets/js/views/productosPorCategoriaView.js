@@ -12,25 +12,25 @@ class ProductosPorCategoriaView {
 
   #generateMarkup({ categoria, data }) {
     return `
-      <section class="section-categoria">
-        <div class="section-categoria__container container">
+      <section class="section-productos">
+        <div class="section-productos__container container">
           ${breadCrumbsView({
             crumbs: [],
             activeCrumb: {
               name: categoria,
             },
-            sectionClassname: 'section-categoria__breadcrumbs',
+            sectionClassname: 'mb-xs',
           })}
           ${
             data.length !== 0
-              ? `<h2 class="section-categoria__title heading-2">${categoria}</h2>`
+              ? `<h2 class="section-productos__title heading-2 mb-sm">${categoria}</h2>`
               : ''
           }
           ${
             data.length !== 0
               ? gridCardsView(data)
               : `
-              <p class="section-categoria__message">${this.#emptyDataMsg}</p>
+              <p class="section-productos__message">${this.#emptyDataMsg}</p>
               `
           }
         </div>

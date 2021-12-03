@@ -9,9 +9,9 @@ class SearchProductosView {
 
   #generateMarkup({ query, data }) {
     return `
-      <section class="section-destacados">
-        <div class="section-destacados__container container">
-        <h2 class="section-destacados__title heading-2">${
+      <section class="section-productos">
+        <div class="section-productos__container container">
+        <h2 class="section-productos__title heading-2 text-center mb-sm">${
           data.length === 0 ? 'No hay resultados para' : 'Resultados para'
         } "${query}"</h2>
         ${gridCardsView(data)}

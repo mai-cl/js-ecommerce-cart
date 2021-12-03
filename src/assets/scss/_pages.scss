@@ -1,10 +1,16 @@
 .section-producto {
   padding: 3.2rem 0;
+
   &__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2.4rem;
+
+    @include respond(md-screen) {
+      grid-template-columns: 1fr;
+    }
   }
+
   &__breadcrumbs {
     grid-column: 1 / -1;
   }
@@ -16,6 +22,11 @@
       height: 100%;
       object-fit: contain;
     }
+
+    @include respond(md-screen) {
+      width: 70vw;
+      justify-self: center;
+    }
   }
 
   &__maininfo {
@@ -24,7 +35,6 @@
 
   &__title {
     font-size: 2.4rem;
-    text-align: left;
   }
 
   &__description {
@@ -64,8 +74,7 @@
   }
 }
 
-.section-categoria,
-.section-busqueda {
+.section-productos {
   min-height: calc(100vh - 13.2rem);
   padding: 3.2rem 0;
   background-color: var(--color-grey-light-2);
@@ -74,13 +83,32 @@
     min-height: calc(100vh - 8.2rem);
   }
 
-  &__breadcrumbs {
-    margin-bottom: 1.2rem;
+  &__message {
+    font-weight: 500;
+    text-align: center;
+  }
+}
+
+.section-error {
+  padding: 3.2rem 0;
+  min-height: calc(100vh - 13.2rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include respond(md-screen) {
+    min-height: calc(100vh - 8.2rem);
   }
 
-  &__title {
-    text-align: left;
-    margin-bottom: 2.4rem;
+  &__img {
+    margin: 0 auto;
+    width: 34rem;
+    margin-bottom: 1.6rem;
+
+    img {
+      display: block;
+      width: 100%;
+    }
   }
 
   &__message {
