@@ -1,6 +1,7 @@
 import { categoria } from './controllers/categoriaController'
 import { home } from './controllers/homeController'
 import { producto } from './controllers/productoController'
+import './views/cartView'
 import headerView from './views/headerView'
 import mainView from './views/mainView'
 import footerView from './views/footerView'

@@ -62,7 +62,7 @@
             <button class="btn header__button">
               <i class="far fa-user"></i>
             </button>
-            <button class="btn header__button">
+            <button class="btn header__button" id="open-cart-btn">
               <i class="fas fa-shopping-cart"></i>
             </button>
           </div>
@@ -290,6 +290,99 @@
     </header>
 
     <main id="main"></main>
+
+    <section class="cart">
+      <div class="cart__modal">
+        <div class="cart__header">
+          <div class="container">
+            <button class="cart__close-btn" id="close-cart-btn">
+              <i class="fas fa-times"></i>
+            </button>
+            <h2 class="cart__title">Carrito de Compras</h2>
+          </div>
+        </div>
+        <div class="cart__body">
+          <div class="container">
+            <ul class="cart__list mb-sm">
+              <li class="cart-item">
+                <button class="cart-item__delete-btn">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+                <span class="cart-item__img">
+                  <img src="./assets/img/2.jpg" alt="asd" />
+                </span>
+                <h3 class="cart-item__title">
+                  <a href="#" class="cart-item__link">
+                    Procesador AMD Ryzen 5 1600 AF
+                  </a>
+                </h3>
+                <span class="qty-selector">
+                  <button class="qty-selector__btn qty-selector__btn--dec">
+                    -
+                  </button>
+                  <input
+                    class="qty-selector__input"
+                    type="number"
+                    name="quantity"
+                    id="quantity"
+                    readonly
+                    min="1"
+                    max="6"
+                    value="1"
+                  />
+                  <button class="qty-selector__btn qty-selector__btn--inc">
+                    +
+                  </button>
+                </span>
+                <span class="cart-item__total">$21000</span>
+              </li>
+
+              <li class="cart-item">
+                <button class="cart-item__delete-btn">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+                <span class="cart-item__img">
+                  <img src="./assets/img/3.jpg" alt="asd" />
+                </span>
+                <h3 class="cart-item__title">
+                  <a href="#" class="cart-item__link">
+                    Placa De Video AMD Radeon RX 580 8GB
+                  </a>
+                </h3>
+                <span class="qty-selector">
+                  <button class="qty-selector__btn qty-selector__btn--dec">
+                    -
+                  </button>
+                  <input
+                    class="qty-selector__input"
+                    type="number"
+                    name="quantity"
+                    id="quantity"
+                    readonly
+                    min="1"
+                    max="6"
+                    value="1"
+                  />
+                  <button class="qty-selector__btn qty-selector__btn--inc">
+                    +
+                  </button>
+                </span>
+                <span class="cart-item__total">$21000</span>
+              </li>
+            </ul>
+            <hr class="mb-sm" />
+            <div class="cart__subtotal mb-sm">
+              <span class="cart__subtotal-label">Subtotal:</span>
+              <span class="cart__subtotal-value">$42000</span>
+            </div>
+            <hr class="mb-md" />
+            <button class="cart__main-btn btn btn--full-width">
+              Iniciar Compra
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer class="footer">
       <div class="footer__section footer__section--1">

@@ -35,7 +35,9 @@ class ProductoView {
             <div class="section-producto__price">$${item.precio}</div>
             <div class="section-producto__areabtn">
               <div class="qty-selector">
-                <button class="qty-selector__btn">-</button>
+                <button class="qty-selector__btn qty-selector__btn--dec">
+                  -
+                </button>
                 <input
                   class="qty-selector__input"
                   type="number"
@@ -46,7 +48,9 @@ class ProductoView {
                   max="6"
                   value="1"
                 />
-                <button class="qty-selector__btn">+</button>
+                <button class="qty-selector__btn qty-selector__btn--inc">
+                  +
+                </button>
               </div>
               <button class="btn section-producto__btn">
                 Sumar al carrito
