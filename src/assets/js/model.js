@@ -6,11 +6,65 @@ const state = {
   products: null,
   categorias: null,
   categoria: null,
+  cart: {
+    items: [],
+    subtotal: null,
+    quantity: null,
+  },
+}
+
+function addToCart(qty = 1) {
+  const { id, nombre, precio, urlImage } = state.targetProduct
+  let itemInCart = state.cart.items.find(item => item.id === id)
+  if (itemInCart) {
+    itemInCart.qty += qty
+    itemInCart.totalPrice = itemInCart.qty * itemInCart.unitPrice
+    updateSubtotal()
+    return itemInCart
+  } else {
+    const newItem = {
+      id: id,
+      urlImage: urlImage,
+      name: nombre,
+      qty: qty,
+      unitPrice: precio,
+      totalPrice: qty * precio,
+    }
+    state.cart.items.push(newItem)
+    updateSubtotal()
+    return newItem
+  }
+}
+
+function updateItemCartQty(qty) {
+  const item = state.cart.items.find(item => item.id === state.targetProduct.id)
+  item.qty = qty
+  item.totalPrice = qty * item.unitPrice
+  updateSubtotal()
+}
+
+function deleteItemCart(itemId) {
+  const itemIndex = state.cart.items.findIndex(item => item.id === itemId)
+  const [deletedItem] = state.cart.items.splice(itemIndex, 1)
+  updateSubtotal()
+  return deletedItem
+}
+
+function updateSubtotal() {
+  state.cart.subtotal = state.cart.items.reduce(
+    (acum, item) => acum + item.totalPrice,
+    0
+  )
 }
 
 async function getProducts() {
   const data = await getJSON(`${API_URL}/productos?_expand=categoria`)
   state.products = data
+}
+
+async function getProductById(id) {
+  const data = await getJSON(`${API_URL}/productos/${id}?_expand=categoria`)
+  state.targetProduct = data
 }
 
 async function getProductsByCategory(categoriaId) {
@@ -42,7 +96,6 @@ async function getProductByPathparam(pathParam) {
     `${API_URL}/productos?pathParam=${pathParam}&_expand=categoria`
   )
   state.targetProduct = data[0]
-  console.log(state.targetProduct)
 }
 
 export default {
@@ -53,4 +106,8 @@ export default {
   getProducts,
   getProductsByCategory,
   getProductsByQuery,
+  getProductById,
+  addToCart,
+  updateItemCartQty,
+  deleteItemCart,
 }

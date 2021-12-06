@@ -18,7 +18,7 @@ function gridCardsView(data) {
               </h3>
             </a>
             <div class="itemcard__price">$${item.precio}</div>
-            <button class="itemcard__btn btn">Sumar al carrito</button>
+            <button class="itemcard__btn btn" data-id="${item.id}">Sumar al carrito</button>
           </div>
         </div>
       `

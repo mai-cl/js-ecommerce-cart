@@ -3,6 +3,12 @@ import gridCardsView from './gridCardsView'
 class ProductosDestacadosView {
   #title = 'Destacados'
 
+  addHandler(event, handler) {
+    document
+      .querySelector('.section-productos')
+      .addEventListener(event, handler)
+  }
+
   render(data) {
     document
       .getElementById('main')

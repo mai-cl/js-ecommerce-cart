@@ -240,9 +240,10 @@
     left: 100%;
     top: 0;
     transition: transform 0.3s;
+    overflow-y: scroll;
 
-    &.overflow {
-      overflow-y: scroll;
+    @include respond(md-screen) {
+      width: 100%;
     }
   }
 
@@ -323,7 +324,7 @@
   }
 
   &__title {
-    flex: 0 0 22rem;
+    flex: 0 1 22rem;
     font-size: 1.4rem;
     font-weight: 500;
   }
@@ -335,9 +336,6 @@
       text-decoration: none;
       color: currentColor;
     }
-  }
-
-  .qty-selector {
   }
 
   &__total {

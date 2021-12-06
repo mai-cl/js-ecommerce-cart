@@ -4,6 +4,12 @@ import gridCardsView from './gridCardsView'
 class ProductosPorCategoriaView {
   #emptyDataMsg = 'Proximamente'
 
+  addHandler(event, handler) {
+    document
+      .querySelector('.section-productos')
+      .addEventListener(event, handler)
+  }
+
   render(props) {
     document
       .getElementById('main')

@@ -1,6 +1,26 @@
 import { breadCrumbsView } from './breadCrumbsView'
 
 class ProductoView {
+  increaseQty() {
+    console.log('// Increase quantity')
+    document.querySelector('.qty-selector__input').value++
+  }
+
+  decreaseQty() {
+    console.log('// Decrease quantity')
+    const input = document.querySelector('.qty-selector__input')
+    if (parseInt(input.value) === 1) return
+    input.value--
+  }
+
+  getInputQty() {
+    return parseInt(document.querySelector('.qty-selector__input').value)
+  }
+
+  addHandler(event, handler) {
+    document.querySelector('.section-producto').addEventListener(event, handler)
+  }
+
   render(item) {
     document
       .getElementById('main')
@@ -35,7 +55,7 @@ class ProductoView {
             <div class="section-producto__price">$${item.precio}</div>
             <div class="section-producto__areabtn">
               <div class="qty-selector">
-                <button class="qty-selector__btn qty-selector__btn--dec">
+                <button class="qty-selector__btn qty-selector__btn--dec" data-action="decreaseQty">
                   -
                 </button>
                 <input
@@ -45,14 +65,14 @@ class ProductoView {
                   id="quantity"
                   readonly
                   min="1"
-                  max="6"
+                  max="10"
                   value="1"
                 />
-                <button class="qty-selector__btn qty-selector__btn--inc">
+                <button class="qty-selector__btn qty-selector__btn--inc" data-action="increaseQty">
                   +
                 </button>
               </div>
-              <button class="btn section-producto__btn">
+              <button class="btn section-producto__btn" data-id="${item.id}">
                 Sumar al carrito
               </button>
             </div>

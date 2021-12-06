@@ -1,6 +1,12 @@
 import gridCardsView from '../views/gridCardsView'
 
 class SearchProductosView {
+  addHandler(event, handler) {
+    document
+      .querySelector('.section-productos')
+      .addEventListener(event, handler)
+  }
+
   render(props) {
     document
       .getElementById('main')
