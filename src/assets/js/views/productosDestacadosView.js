@@ -1,4 +1,5 @@
 import gridCardsView from './gridCardsView'
+import messageView from './messageView'
 
 class ProductosDestacadosView {
   #title = 'Destacados'
@@ -13,6 +14,10 @@ class ProductosDestacadosView {
     document
       .getElementById('main')
       .insertAdjacentHTML('beforeend', this.#generateMarkup(data))
+  }
+
+  showSuccessAddToCartMsj() {
+    messageView.renderSuccessMessage('Producto agregado al carrito!')
   }
 
   #generateMarkup(data) {

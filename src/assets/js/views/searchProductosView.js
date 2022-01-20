@@ -1,4 +1,5 @@
 import gridCardsView from '../views/gridCardsView'
+import messageView from './messageView'
 
 class SearchProductosView {
   addHandler(event, handler) {
@@ -11,6 +12,10 @@ class SearchProductosView {
     document
       .getElementById('main')
       .insertAdjacentHTML('beforeend', this.#generateMarkup(props))
+  }
+
+  showSuccessAddToCartMsj() {
+    messageView.renderSuccessMessage('Producto agregado al carrito!')
   }
 
   #generateMarkup({ query, data }) {

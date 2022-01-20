@@ -1,4 +1,5 @@
 import { breadCrumbsView } from './breadCrumbsView'
+import messageView from './messageView'
 
 class ProductoView {
   increaseQty() {
@@ -19,6 +20,10 @@ class ProductoView {
 
   addHandler(event, handler) {
     document.querySelector('.section-producto').addEventListener(event, handler)
+  }
+
+  showSuccessAddToCartMsj() {
+    messageView.renderSuccessMessage('Producto agregado al carrito!')
   }
 
   render(item) {

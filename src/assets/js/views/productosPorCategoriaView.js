@@ -1,5 +1,6 @@
 import { breadCrumbsView } from './breadCrumbsView'
 import gridCardsView from './gridCardsView'
+import messageView from './messageView'
 
 class ProductosPorCategoriaView {
   #emptyDataMsg = 'Proximamente'
@@ -14,6 +15,10 @@ class ProductosPorCategoriaView {
     document
       .getElementById('main')
       .insertAdjacentHTML('beforeend', this.#generateMarkup(props))
+  }
+
+  showSuccessAddToCartMsj() {
+    messageView.renderSuccessMessage('Producto agregado al carrito!')
   }
 
   #generateMarkup({ categoria, data }) {

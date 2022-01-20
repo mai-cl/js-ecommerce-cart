@@ -5,6 +5,7 @@
     height: 8.2rem;
     position: sticky;
     top: 0;
+    z-index: 10;
   }
 
   &__search-section-resp {
@@ -210,6 +211,7 @@
     &--dropdown {
       display: none;
       position: absolute;
+      z-index: 10;
       top: 100%;
       left: -50%;
       background-color: var(--color-primary-dark);

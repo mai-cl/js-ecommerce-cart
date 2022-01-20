@@ -227,6 +227,7 @@
   left: 0;
   visibility: hidden;
   transition: visibility 0.3s;
+  z-index: 100;
 
   &.show {
     visibility: visible;
@@ -341,5 +342,25 @@
   &__total {
     flex: 1;
     text-align: right;
+  }
+}
+
+// MESSAGES
+.messages {
+  position: sticky;
+  top: 0;
+
+  @include respond(md-screen) {
+    top: 8.2rem;
+  }
+
+  .message {
+    padding: 8px;
+    text-align: center;
+
+    &--success {
+      background-color: var(--color-success);
+      color: var(--color-grey-light-1);
+    }
   }
 }

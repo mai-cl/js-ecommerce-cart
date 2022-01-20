@@ -13,6 +13,7 @@ const onAddToCartBtnClick = async e => {
   const addedItem = model.addToCart()
   cartView.updateCartUI(model.state.cart)
   console.log('// Item agregado', addedItem)
+  productosDestacadosView.showSuccessAddToCartMsj()
 }
 
 export const home = async () => {
