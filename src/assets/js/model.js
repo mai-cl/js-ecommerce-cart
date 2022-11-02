@@ -13,6 +13,17 @@ const state = {
   },
 }
 
+function saveInLocalSt() {
+  // Guardar en local storage...
+  localStorage.setItem('cart', JSON.stringify(state.cart))
+}
+
+function loadLocalSt() {
+  const data = localStorage.getItem('cart')
+  if (!data) return
+  state.cart = JSON.parse(data)
+}
+
 function addToCart(qty = 1) {
   const { id, nombre, precio, urlImage } = state.targetProduct
   let itemInCart = state.cart.items.find(item => item.id === id)
@@ -20,6 +31,7 @@ function addToCart(qty = 1) {
     itemInCart.qty += qty
     itemInCart.totalPrice = itemInCart.qty * itemInCart.unitPrice
     updateSubtotal()
+    saveInLocalSt()
     return itemInCart
   } else {
     const newItem = {
@@ -32,6 +44,7 @@ function addToCart(qty = 1) {
     }
     state.cart.items.push(newItem)
     updateSubtotal()
+    saveInLocalSt()
     return newItem
   }
 }
@@ -41,12 +54,14 @@ function updateItemCartQty(qty) {
   item.qty = qty
   item.totalPrice = qty * item.unitPrice
   updateSubtotal()
+  saveInLocalSt()
 }
 
 function deleteItemCart(itemId) {
   const itemIndex = state.cart.items.findIndex(item => item.id === itemId)
   const [deletedItem] = state.cart.items.splice(itemIndex, 1)
   updateSubtotal()
+  saveInLocalSt()
   return deletedItem
 }
 
@@ -110,4 +125,5 @@ export default {
   addToCart,
   updateItemCartQty,
   deleteItemCart,
+  loadLocalSt,
 }

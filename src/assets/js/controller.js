@@ -9,6 +9,7 @@ import Router from './Router'
 import { search } from './controllers/searchController'
 import model from './model'
 import cartView from './views/cartView'
+import loaderSpinnerView from './views/loaderSpinnerView'
 
 function onNavlinkClick(e) {
   if (!e.target.matches('a.header__navlink, a.navlink, a.navlink *')) return
@@ -38,6 +39,9 @@ categoriesPathnames.forEach(catPathname => {
   Router.setRoute(catPathname, categoria)
   Router.setRoute(catPathname, producto, true)
 })
+
+model.loadLocalSt()
+cartView.updateCartUI(model.state.cart)
 
 function app() {
   window.scrollTo(0, 0)
@@ -69,7 +73,9 @@ async function onControlInputClick(e) {
   if (!e.target.matches('.qty-selector__btn')) return
   const button = e.target
   cartView[button.dataset.action](button.dataset.id)
+  loaderSpinnerView.renderTop()
   await model.getProductById(button.dataset.id)
+  loaderSpinnerView.removeTop()
   if (!model.state.targetProduct) return
   model.updateItemCartQty(cartView.getInputQty(button.dataset.id))
   cartView.updateCartUI(model.state.cart)

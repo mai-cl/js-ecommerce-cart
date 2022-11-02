@@ -8,8 +8,9 @@ const onAddToCartBtnClick = async e => {
   if (!e.target.matches('.itemcard__btn')) return
   const btn = e.target
   const productId = btn.dataset.id
-
+  loaderSpinnerView.renderTop()
   await model.getProductById(productId)
+  loaderSpinnerView.removeTop()
   const addedItem = model.addToCart()
   cartView.updateCartUI(model.state.cart)
   console.log('// Item agregado', addedItem)

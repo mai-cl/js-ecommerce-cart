@@ -1,6 +1,7 @@
 function generateMarkup(msj, type) {
   const iconClass = {
     success: 'far fa-check-circle',
+    info: 'info',
   }
 
   return `

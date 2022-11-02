@@ -173,6 +173,14 @@
   justify-content: center;
   align-items: center;
 
+  &--pos-absolute {
+    position: fixed;
+    background-color: var(--color-grey-light-1-transp);
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+  }
+
   @include respond(md-screen) {
     min-height: calc(100vh - 8.2rem);
   }
@@ -227,7 +235,7 @@
   left: 0;
   visibility: hidden;
   transition: visibility 0.3s;
-  z-index: 100;
+  z-index: 10;
 
   &.show {
     visibility: visible;

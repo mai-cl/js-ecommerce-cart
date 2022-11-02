@@ -1,9 +1,7 @@
 const cart = document.querySelector('.cart')
-const cartModal = document.querySelector('.cart__modal')
-const cartList = document.querySelector('.cart__list')
+const cartBodyContainer = document.querySelector('.cart__body .container')
 const openCartBtn = document.getElementById('open-cart-btn')
 const closeCartBtn = document.getElementById('close-cart-btn')
-const cartSubtotalValue = document.querySelector('.cart__subtotal-value')
 
 function setUIhandlers() {
   openCartBtn.addEventListener('click', () => {
@@ -20,10 +18,12 @@ function addHandler(event, handler) {
 }
 
 function updateCartUI(data) {
-  const { items, subtotal, quantity } = data
-  cartList.innerHTML = ''
-  cartList.insertAdjacentHTML('beforeend', generateMarkupItem(items))
-  cartSubtotalValue.textContent = `$${subtotal}`
+  if (data.items.length === 0) {
+    cartBodyContainer.innerHTML = '<p>No hay items en el carrito!</p>'
+    // TODO delegar render de msj en messageView
+    return
+  }
+  cartBodyContainer.innerHTML = generateMarkup(data)
 }
 
 function getInputQty(itemId) {
@@ -49,7 +49,25 @@ function decreaseQty(itemId) {
   input.value--
 }
 
-function generateMarkupItem(data) {
+function generateMarkup(data) {
+  const { items, subtotal, quantity } = data
+  return `
+    <ul class="cart__list mb-sm">
+      ${generateMarkupItems(items)}
+    </ul>
+    <hr class="mb-sm" />
+    <div class="cart__subtotal mb-sm">
+      <span class="cart__subtotal-label">Subtotal:</span>
+      <span class="cart__subtotal-value">$${subtotal}</span>
+    </div>
+    <hr class="mb-md" />
+    <button class="cart__main-btn btn btn--full-width">
+      Iniciar Compra
+    </button>
+  `
+}
+
+function generateMarkupItems(data) {
   return data
     .map(
       item => `
