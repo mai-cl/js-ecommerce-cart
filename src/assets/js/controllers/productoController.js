@@ -3,6 +3,7 @@ import loaderSpinnerView from '../views/loaderSpinnerView'
 import productoView from '../views/productoView'
 import cartView from '../views/cartView'
 import error404View from '../views/error404View'
+import Router from '../Router'
 
 const onAddToCartBtnClick = async e => {
   if (!e.target.matches('.section-producto__btn')) return
@@ -12,9 +13,8 @@ const onAddToCartBtnClick = async e => {
   loaderSpinnerView.renderTop()
   await model.getProductById(productId)
   loaderSpinnerView.removeTop()
-  const addedItem = model.addToCart(qty)
+  model.addToCart(qty)
   cartView.updateCartUI(model.state.cart)
-  console.log('// Item agregado', addedItem)
   productoView.showSuccessAddToCartMsj()
 }
 
@@ -24,9 +24,9 @@ const onControlInputClick = e => {
   productoView[button.dataset.action]()
 }
 
-export const producto = async pathParam => {
+export const producto = async () => {
   loaderSpinnerView.render()
-  await model.getProductByPathparam(pathParam)
+  await model.getProductByPathparam(Router.dynamicParams.productSlug)
   loaderSpinnerView.remove()
 
   if (!model.state.targetProduct) return error404View.render()

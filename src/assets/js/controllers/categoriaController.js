@@ -11,9 +11,8 @@ const onAddToCartBtnClick = async e => {
   loaderSpinnerView.renderTop()
   await model.getProductById(productId)
   loaderSpinnerView.removeTop()
-  const addedItem = model.addToCart()
+  model.addToCart()
   cartView.updateCartUI(model.state.cart)
-  console.log('// Item agregado', addedItem)
   productosPorCategoriaView.showSuccessAddToCartMsj()
 }
 

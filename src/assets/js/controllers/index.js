@@ -1,12 +1,12 @@
-import './views/cartView'
-import headerView from './views/headerView'
-import mainView from './views/mainView'
-import footerView from './views/footerView'
-import Router from './Router'
-import model from './model'
-import cartView from './views/cartView'
-import loaderSpinnerView from './views/loaderSpinnerView'
-import { routes } from './routes'
+import '../views/cartView'
+import headerView from '../views/headerView'
+import mainView from '../views/mainView'
+import footerView from '../views/footerView'
+import model from '../model'
+import cartView from '../views/cartView'
+import loaderSpinnerView from '../views/loaderSpinnerView'
+import { routes } from '../routes'
+import Router from '../Router'
 
 function onNavlinkClick(e) {
   if (!e.target.matches('a.header__navlink, a.navlink, a.navlink *')) return
@@ -16,18 +16,6 @@ function onNavlinkClick(e) {
   headerView.hideResponsiveNav()
   headerView.resetResponsiveNav()
   Router.dispatchNavEvent()
-}
-
-function setInitialHandlers() {
-  window.addEventListener('popstate', () => {
-    Router.navigate(location.pathname)
-  })
-  headerView.addHandler('click', onNavlinkClick)
-  headerView.addHandler('submit', onSubmitForm)
-  mainView.addHandler('click', onNavlinkClick)
-  footerView.addHandler('click', onNavlinkClick)
-  cartView.addHandler('click', onControlInputClick)
-  cartView.addHandler('click', onDeleteBtnClick)
 }
 
 function onSubmitForm(e) {
@@ -59,14 +47,25 @@ async function onDeleteBtnClick(e) {
   if (!model.state.targetProduct) return
   const deletedItem = model.deleteItemCart(parseInt(button.dataset.id))
   cartView.updateCartUI(model.state.cart)
-  console.log('// Item eliminado', deletedItem)
 }
 
-function app() {
+export function setInitialHandlers() {
+  window.addEventListener('popstate', () => {
+    Router.navigate(location.pathname)
+  })
+  headerView.addHandler('click', onNavlinkClick)
+  headerView.addHandler('submit', onSubmitForm)
+  mainView.addHandler('click', onNavlinkClick)
+  footerView.addHandler('click', onNavlinkClick)
+  cartView.addHandler('click', onControlInputClick)
+  cartView.addHandler('click', onDeleteBtnClick)
+}
+
+export function initRouter() {
   Router.init(routes)
+}
+
+export function loadCartData() {
   model.loadLocalSt()
   cartView.updateCartUI(model.state.cart)
-  setInitialHandlers()
 }
-
-export default app
