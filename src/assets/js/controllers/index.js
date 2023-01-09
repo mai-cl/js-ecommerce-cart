@@ -9,12 +9,11 @@ import { routes } from '../routes'
 import Router from '../Router'
 
 function onNavlinkClick(e) {
-  if (!e.target.matches('a.header__navlink, a.navlink, a.navlink *')) return
-  e.preventDefault()
   const anchor = e.target.closest('a')
+  if (!anchor) return
+  e.preventDefault()
   history.pushState({}, '', anchor.href)
   headerView.hideResponsiveNav()
-  headerView.resetResponsiveNav()
   Router.dispatchNavEvent()
 }
 
@@ -23,6 +22,7 @@ function onSubmitForm(e) {
   const form = e.target
   const inputValue = form.search.value
   form.search.blur()
+  headerView.hideSearchBar()
   history.pushState({}, '', `/search?query=${inputValue}`)
   Router.dispatchNavEvent()
 }

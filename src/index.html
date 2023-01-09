@@ -15,33 +15,34 @@
   </head>
   <body>
     <header class="header">
-      <div class="header__container container">
-        <section class="header__search-section-resp">
-          <div class="container">
-            <button class="header__menu-btn-resp" id="close-form-btn">
-              <i class="fas fa-times"></i>
+      <!-- <div class="header__container container"> -->
+      <section class="header__search-section-resp">
+        <div class="container">
+          <button class="header__menu-btn-resp" id="close-form-btn">
+            <i class="fas fa-times"></i>
+          </button>
+          <form class="header__searchform header__searchform--resp">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              class="header__searchinput"
+              placeholder="Buscar"
+            />
+            <button type="submit" class="header__searchsubmit">
+              <i class="fas fa-search"></i>
             </button>
-            <form class="header__searchform header__searchform--resp">
-              <input
-                type="text"
-                name="search"
-                id="search"
-                class="header__searchinput"
-                placeholder="Buscar"
-              />
-              <button type="submit" class="header__searchsubmit">
-                <i class="fas fa-search"></i>
-              </button>
-            </form>
-          </div>
-        </section>
+          </form>
+        </div>
+      </section>
 
-        <section class="header__section header__section--1">
+      <section class="header__section header__section--1">
+        <div class="container">
           <button class="header__menu-btn-resp" id="open-menu-btn">
             <i class="fas fa-bars"></i>
           </button>
           <a class="header__logo" href="/"
-            ><h1 class="header__logo heading-1">MoonGamers</h1></a
+            ><h1 class="header__logo heading-1"><span>Moon</span>Gamers</h1></a
           >
           <form class="header__searchform">
             <input
@@ -66,228 +67,153 @@
               <i class="fas fa-shopping-cart"></i>
             </button>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="header__responsive-section">
-          <button class="header__responsive-back-btn">
-            <i class="fas fa-long-arrow-alt-left"></i>
-          </button>
-          <nav class="header__responsive-nav">
-            <ul class="header__responsive-navlist active" id="home-links">
-              <li class="header__responsive-navitem">
-                <button
-                  class="header__responsive-navlink header__responsive-navlink--hasitems"
-                  data-items="hardware-links"
-                >
-                  Hardware <i class="fas fa-long-arrow-alt-right"></i>
-                </button>
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/perifericos"
-                  >Periféricos</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/monitores"
-                  >Monitores</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/notebooks"
-                  >Notebooks</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/playstation"
-                  >Playstation</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/ofertas"
-                  >Ofertas</a
-                >
-              </li>
-            </ul>
-            <ul
-              class="header__responsive-navlist"
-              id="hardware-links"
-              data-back="home-links"
-            >
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/procesadores"
-                  >Procesadores</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/memorias-ram"
-                  >Memorias RAM</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/motherboards"
-                  >Motherboards</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/placas-de-video"
-                  >Placas De Video</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/almacenamiento"
-                  >Almacenamiento</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/fuentes"
-                  >Fuentes</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/fuentes"
-                  >Gabinetes</a
-                >
-              </li>
-              <li class="header__responsive-navitem">
-                <a
-                  class="header__responsive-navlink navlink"
-                  href="/productos/refrigeracion"
-                  >Refrigeración
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </section>
-
-        <section class="header__section header__section--2">
-          <nav class="header__nav" id="nav-main">
-            <ul class="header__navlist">
-              <li class="header__navitem header__navitem--dropdown">
-                <span class="header__navlink header__navlink--dropdown"
-                  >Hardware <i class="fas fa-chevron-down"></i
-                ></span>
-                <ul class="header__navlist header__navlist--dropdown">
-                  <li>
-                    <a
-                      class="header__navlink"
-                      href="/productos/procesadores"
-                      data-id="1"
-                      >Procesadores</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="header__navlink"
-                      href="/productos/memorias-ram"
-                      data-id="2"
-                      >Memorias RAM</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="header__navlink"
-                      href="/productos/motherboards"
-                      data-id="3"
-                      >Motherboards</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="header__navlink"
-                      href="/productos/placas-de-video"
-                      data-id="4"
-                      >Placas de Video</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="header__navlink"
-                      href="/productos/almacenamiento"
-                      data-id="5"
-                      >Almacenamiento</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="header__navlink"
-                      href="/productos/fuentes"
-                      data-id="6"
-                      >Fuentes</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="header__navlink"
-                      href="/productos/gabinetes"
-                      data-id="7"
-                      >Gabinetes</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="header__navlink"
-                      href="/productos/refrigeracion"
-                      data-id="8"
-                      >Refrigeración</a
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li class="header__navitem">
-                <a href="/productos/perifericos" class="header__navlink"
-                  >Periféricos</a
-                >
-              </li>
-              <li class="header__navitem">
-                <a href="/productos/monitores" class="header__navlink"
-                  >Monitores</a
-                >
-              </li>
-              <li class="header__navitem">
-                <a href="/productos/notebooks" class="header__navlink"
-                  >Notebooks</a
-                >
-              </li>
-              <li class="header__navitem">
-                <a href="/productos/playstation" class="header__navlink"
-                  >Playstation</a
-                >
-              </li>
-              <li class="header__navitem">
-                <a href="/productos/ofertas" class="header__navlink">Ofertas</a>
-              </li>
-            </ul>
-          </nav>
-        </section>
-      </div>
+      <section class="header__section header__section--2" id="nav-section">
+        <nav class="header__nav container" id="nav-main">
+          <ul class="header__navlist">
+            <!-- <li class="header__navitem header__navitem--dropdown">
+                      <span class="header__navlink header__navlink--dropdown"
+                        >Hardware <i class="fas fa-chevron-down"></i
+                      ></span>
+                      <ul class="header__navlist header__navlist--dropdown">
+                        <li>
+                          <a
+                            class="header__navlink"
+                            href="/productos/procesadores"
+                            data-id="1"
+                            >Procesadores</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="header__navlink"
+                            href="/productos/memorias-ram"
+                            data-id="2"
+                            >Memorias RAM</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="header__navlink"
+                            href="/productos/motherboards"
+                            data-id="3"
+                            >Motherboards</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="header__navlink"
+                            href="/productos/placas-de-video"
+                            data-id="4"
+                            >Placas de Video</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="header__navlink"
+                            href="/productos/almacenamiento"
+                            data-id="5"
+                            >Almacenamiento</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="header__navlink"
+                            href="/productos/fuentes"
+                            data-id="6"
+                            >Fuentes</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="header__navlink"
+                            href="/productos/gabinetes"
+                            data-id="7"
+                            >Gabinetes</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="header__navlink"
+                            href="/productos/refrigeracion"
+                            data-id="8"
+                            >Refrigeración</a
+                          >
+                        </li>
+                      </ul>
+                    </li> -->
+            <li class="header__navitem">
+              <a href="/productos/procesadores" class="header__navlink">
+                <svg class="header__navlink-icon">
+                  <use href="./assets/img/icons/sprite.svg#cpu"></use>
+                </svg>
+                <span>Procesadores</span>
+              </a>
+            </li>
+            <li class="header__navitem">
+              <a href="/productos/memorias-ram" class="header__navlink"
+                ><svg class="header__navlink-icon">
+                  <use href="./assets/img/icons/sprite.svg#memory"></use>
+                </svg>
+                <span>Memorias</span></a
+              >
+            </li>
+            <li class="header__navitem">
+              <a href="/productos/motherboards" class="header__navlink"
+                ><svg class="header__navlink-icon">
+                  <use href="./assets/img/icons/sprite.svg#motherboard"></use>
+                </svg>
+                <span>Motherboards</span></a
+              >
+            </li>
+            <li class="header__navitem">
+              <a href="/productos/placas-de-video" class="header__navlink"
+                ><svg class="header__navlink-icon">
+                  <use href="./assets/img/icons/sprite.svg#gpu"></use>
+                </svg>
+                <span>Placas de Video</span></a
+              >
+            </li>
+            <li class="header__navitem">
+              <a href="/productos/almacenamiento" class="header__navlink"
+                ><svg class="header__navlink-icon">
+                  <use href="./assets/img/icons/sprite.svg#hdd"></use>
+                </svg>
+                <span>Almacenamiento</span></a
+              >
+            </li>
+            <li class="header__navitem">
+              <a href="/productos/fuentes" class="header__navlink"
+                ><svg class="header__navlink-icon">
+                  <use href="./assets/img/icons/sprite.svg#power"></use>
+                </svg>
+                <span>Fuentes</span></a
+              >
+            </li>
+            <li class="header__navitem">
+              <a href="/productos/gabinetes" class="header__navlink"
+                ><svg class="header__navlink-icon">
+                  <use href="./assets/img/icons/sprite.svg#case"></use>
+                </svg>
+                <span>Gabinetes</span></a
+              >
+            </li>
+            <li class="header__navitem">
+              <a href="/productos/refrigeracion" class="header__navlink"
+                ><svg class="header__navlink-icon">
+                  <use href="./assets/img/icons/sprite.svg#cooler"></use>
+                </svg>
+                <span>Refrigeración</span></a
+              >
+            </li>
+          </ul>
+        </nav>
+      </section>
     </header>
 
     <section class="messages"></section>
-
     <main id="main"></main>
 
     <section class="cart">
