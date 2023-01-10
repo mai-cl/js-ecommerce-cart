@@ -23,6 +23,7 @@ function onSubmitForm(e) {
   const inputValue = form.search.value
   form.search.blur()
   headerView.hideSearchBar()
+  headerView.hideResponsiveNav()
   history.pushState({}, '', `/search?query=${inputValue}`)
   Router.dispatchNavEvent()
 }
