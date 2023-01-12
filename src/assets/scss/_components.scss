@@ -382,14 +382,28 @@
   @include respond(md-screen) {
     top: 8.2rem;
   }
+}
 
-  .message {
-    padding: 8px;
-    text-align: center;
+.message {
+  padding: 8px;
+  text-align: center;
 
-    &--success {
-      background-color: var(--color-success);
-      color: var(--color-grey-light-1);
-    }
+  &:not(:last-child) {
+    margin-bottom: 1px;
+  }
+
+  &--success {
+    background-color: var(--color-success);
+    color: var(--color-grey-light-1);
+  }
+
+  &--error {
+    background-color: var(--color-error);
+    color: var(--color-grey-light-1);
+  }
+
+  &--info {
+    background-color: var(--color-info);
+    color: var(--color-grey-light-1);
   }
 }

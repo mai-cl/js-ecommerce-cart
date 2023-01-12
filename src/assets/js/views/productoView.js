@@ -3,12 +3,10 @@ import messageView from './messageView'
 
 class ProductoView {
   increaseQty() {
-    console.log('// Increase quantity')
     document.querySelector('.qty-selector__input').value++
   }
 
   decreaseQty() {
-    console.log('// Decrease quantity')
     const input = document.querySelector('.qty-selector__input')
     if (parseInt(input.value) === 1) return
     input.value--
@@ -91,6 +89,10 @@ class ProductoView {
         </div>
       </section>
     `
+  }
+
+  messageContainer() {
+    return document.querySelector('.messages')
   }
 
   #generateSpecsMarkup(specs) {

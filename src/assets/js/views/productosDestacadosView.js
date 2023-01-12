@@ -20,6 +20,10 @@ class ProductosDestacadosView {
     messageView.renderSuccessMessage('Producto agregado al carrito!')
   }
 
+  messageContainer() {
+    return document.querySelector('.messages')
+  }
+
   #generateMarkup(data) {
     return `
       <section class="section-productos pt-lg pb-lg">

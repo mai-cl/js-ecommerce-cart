@@ -21,6 +21,10 @@ class ProductosPorCategoriaView {
     messageView.renderSuccessMessage('Producto agregado al carrito!')
   }
 
+  messageContainer() {
+    return document.querySelector('.messages')
+  }
+
   #generateMarkup({ categoria, data }) {
     return `
       <section class="section-productos">

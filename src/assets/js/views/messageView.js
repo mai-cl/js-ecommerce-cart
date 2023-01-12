@@ -1,7 +1,10 @@
+let messagesTimeout = {}
+
 function generateMarkup(msj, type) {
   const iconClass = {
     success: 'far fa-check-circle',
-    info: 'info',
+    info: 'fa-solid fa-circle-info',
+    error: 'fa-solid fa-triangle-exclamation',
   }
 
   return `
@@ -16,6 +19,10 @@ function removeMessage() {
   document.querySelector('.message').remove()
 }
 
+function removeMessageFrom(messageBox) {
+  messageBox.querySelector('.message').remove()
+}
+
 function renderSuccessMessage(msj) {
   document
     .querySelector('.messages')
@@ -23,6 +30,26 @@ function renderSuccessMessage(msj) {
   setTimeout(removeMessage, 3000)
 }
 
+function renderMessageOn(containerElement, type, msj, isFixed) {
+  if (messagesTimeout[containerElement.id])
+    clearTimeout(messagesTimeout[containerElement.id])
+  containerElement.innerHTML = generateMarkup(msj, type)
+  if (!isFixed) {
+    messagesTimeout[containerElement.id] = setTimeout(
+      () => removeMessageFrom(containerElement),
+      3000
+    )
+  }
+}
+
+function removeMessageOn(containerElement) {
+  if (messagesTimeout[containerElement.id])
+    clearTimeout(messagesTimeout[containerElement.id])
+  containerElement.innerHTML = ''
+}
+
 export default {
   renderSuccessMessage,
+  removeMessageOn,
+  renderMessageOn,
 }

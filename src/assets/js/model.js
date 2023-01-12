@@ -72,6 +72,17 @@ function updateSubtotal() {
   )
 }
 
+function getItemQtyInCart(productId) {
+  const item = state.cart.items.find(item => item.id == productId)
+  return item ? item.qty : 0
+}
+
+function checkEnoughStock(inputQty, action) {
+  if (action === 'decreaseQty') return
+  if (state.targetProduct.stock < inputQty + 1)
+    throw new Error('No hay stock suficiente!')
+}
+
 async function getProducts() {
   const data = await getJSON(`${API_URL}/productos?_expand=categoria`)
   state.products = data
@@ -115,6 +126,7 @@ async function getProductByPathparam(pathParam) {
 
 export default {
   state,
+  getItemQtyInCart,
   getCategories,
   getCategoryByPathname,
   getProductByPathparam,
@@ -125,5 +137,6 @@ export default {
   addToCart,
   updateItemCartQty,
   deleteItemCart,
+  checkEnoughStock,
   loadLocalSt,
 }

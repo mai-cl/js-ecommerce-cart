@@ -1,4 +1,7 @@
+import messageView from './messageView'
+
 const cart = document.querySelector('.cart')
+const cartMessages = document.querySelector('.cart__messages')
 const cartBodyContainer = document.querySelector('.cart__body .container')
 const openCartBtn = document.getElementById('open-cart-btn')
 const closeCartBtn = document.getElementById('close-cart-btn')
@@ -11,19 +14,42 @@ function setUIhandlers() {
   closeCartBtn.addEventListener('click', () => {
     cart.classList.remove('show')
   })
+
+  cart.addEventListener('click', e => {
+    if (e.target.matches('.cart__modal, .cart__modal *')) return
+    cart.classList.remove('show')
+  })
+}
+
+function closeCart() {
+  cart.classList.remove('show')
 }
 
 function addHandler(event, handler) {
   cart.addEventListener(event, handler)
 }
 
+function cleanContainer() {
+  Array.from(
+    cartBodyContainer.querySelectorAll(
+      ':not(.cart__messages, .cart__messages *)'
+    )
+  ).map(element => element.remove())
+}
+
 function updateCartUI(data) {
+  cleanContainer()
   if (data.items.length === 0) {
-    cartBodyContainer.innerHTML = '<p>No hay items en el carrito!</p>'
-    // TODO delegar render de msj en messageView
+    messageView.renderMessageOn(
+      cartMessages,
+      'info',
+      'No hay items en el carrito!',
+      true
+    )
     return
   }
-  cartBodyContainer.innerHTML = generateMarkup(data)
+  messageView.removeMessageOn(cartMessages)
+  cartBodyContainer.insertAdjacentHTML('beforeend', generateMarkup(data))
 }
 
 function getInputQty(itemId) {
@@ -35,13 +61,11 @@ function getInputQty(itemId) {
 }
 
 function increaseQty(itemId) {
-  console.log('// Increase quantity')
   cart.querySelector(`.cart-item[data-id="${itemId}"] .qty-selector__input`)
     .value++
 }
 
 function decreaseQty(itemId) {
-  console.log('// Decrease quantity')
   const input = cart.querySelector(
     `.cart-item[data-id="${itemId}"] .qty-selector__input`
   )
@@ -108,6 +132,10 @@ function generateMarkupItems(data) {
     .join('')
 }
 
+function messageContainer() {
+  return document.querySelector('.cart__messages')
+}
+
 setUIhandlers()
 
 export default {
@@ -116,4 +144,5 @@ export default {
   addHandler,
   increaseQty,
   decreaseQty,
+  messageContainer,
 }

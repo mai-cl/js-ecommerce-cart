@@ -18,6 +18,10 @@ class SearchProductosView {
     messageView.renderSuccessMessage('Producto agregado al carrito!')
   }
 
+  messageContainer() {
+    return document.querySelector('.messages')
+  }
+
   #generateMarkup({ query, data }) {
     return `
       <section class="section-productos">
