@@ -1,2 +1,1 @@
-/* export const API_URL = 'https://api-ecommerce-hw.herokuapp.com' */
-export const API_URL = 'http://localhost:3000'
+export const API_URL = 'https://api-products-olv8.onrender.com'
