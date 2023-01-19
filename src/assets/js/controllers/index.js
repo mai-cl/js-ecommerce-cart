@@ -14,8 +14,7 @@ function onNavlinkClick(e) {
   if (!anchor) return
   e.preventDefault()
   history.pushState({}, '', anchor.href)
-  headerView.hideSearchBar()
-  headerView.hideResponsiveNav()
+
   Router.dispatchNavEvent()
 }
 
@@ -87,6 +86,9 @@ async function onDeleteBtnClick(e) {
 
 export function setInitialHandlers() {
   window.addEventListener('popstate', () => {
+    headerView.hideSearchBar()
+    headerView.hideResponsiveNav()
+    cartView.closeCart()
     Router.navigate(location.pathname)
   })
   headerView.addHandler('click', onNavlinkClick)

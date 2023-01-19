@@ -37,6 +37,7 @@ const onAddToCartBtnClick = async e => {
 }
 
 export const home = async () => {
+  model.abortIncomingRequest()
   messageView.removeMessageOn(productosDestacadosView.messageContainer())
   loaderSpinnerView.render()
 
@@ -45,14 +46,16 @@ export const home = async () => {
     bannerView.render()
     productosDestacadosView.render(model.state.products)
     productosDestacadosView.addHandler('click', onAddToCartBtnClick)
-  } catch (error) {
-    messageView.renderMessageOn(
-      productosDestacadosView.messageContainer(),
-      'error',
-      error.message,
-      true
-    )
-  } finally {
     loaderSpinnerView.remove()
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      messageView.renderMessageOn(
+        productosDestacadosView.messageContainer(),
+        'error',
+        'Ha ocurrido un error inesperado. Inténtelo nuevamente.',
+        true
+      )
+      loaderSpinnerView.remove()
+    }
   }
 }

@@ -44,6 +44,7 @@ const onAddToCartBtnClick = async e => {
 export const search = async () => {
   const query = getQueryValue()
   if (!query) return error404View.render()
+  model.abortIncomingRequest()
   loaderSpinnerView.render()
   messageView.removeMessageOn(searchProductosView.messageContainer())
 
@@ -51,14 +52,16 @@ export const search = async () => {
     await model.getProductsByQuery(query)
     searchProductosView.render({ query, data: model.state.products })
     searchProductosView.addHandler('click', onAddToCartBtnClick)
-  } catch (error) {
-    messageView.renderMessageOn(
-      searchProductosView.messageContainer(),
-      'error',
-      error.message,
-      true
-    )
-  } finally {
     loaderSpinnerView.remove()
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      messageView.renderMessageOn(
+        searchProductosView.messageContainer(),
+        'error',
+        'Ha ocurrido un error inesperado. Inténtelo nuevamente.',
+        true
+      )
+      loaderSpinnerView.remove()
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { API_URL } from './config'
-import { getJSON } from './helpers'
+import { abortRequest, getJSON } from './api'
 
 const state = {
   targetProduct: null,
@@ -13,8 +13,11 @@ const state = {
   },
 }
 
+function abortIncomingRequest() {
+  abortRequest()
+}
+
 function saveInLocalSt() {
-  // Guardar en local storage...
   localStorage.setItem('cart', JSON.stringify(state.cart))
 }
 
@@ -139,4 +142,5 @@ export default {
   deleteItemCart,
   checkEnoughStock,
   loadLocalSt,
+  abortIncomingRequest,
 }

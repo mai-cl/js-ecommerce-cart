@@ -145,4 +145,5 @@ export default {
   increaseQty,
   decreaseQty,
   messageContainer,
+  closeCart,
 }

@@ -49,6 +49,7 @@ const onControlInputClick = e => {
 }
 
 export const producto = async () => {
+  model.abortIncomingRequest()
   loaderSpinnerView.render()
   messageView.removeMessageOn(productoView.messageContainer())
 
@@ -58,14 +59,16 @@ export const producto = async () => {
     productoView.render(model.state.targetProduct)
     productoView.addHandler('click', onControlInputClick)
     productoView.addHandler('click', onAddToCartBtnClick)
-  } catch (error) {
-    messageView.renderMessageOn(
-      productoView.messageContainer(),
-      'error',
-      error.message,
-      true
-    )
-  } finally {
     loaderSpinnerView.remove()
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      messageView.renderMessageOn(
+        productoView.messageContainer(),
+        'error',
+        'Ha ocurrido un error inesperado. Inténtelo nuevamente.',
+        true
+      )
+      loaderSpinnerView.remove()
+    }
   }
 }

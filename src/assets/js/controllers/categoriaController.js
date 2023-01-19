@@ -38,6 +38,7 @@ const onAddToCartBtnClick = async e => {
 
 export const categoria = async () => {
   const pathname = location.pathname
+  model.abortIncomingRequest()
   messageView.removeMessageOn(productosPorCategoriaView.messageContainer())
   loaderSpinnerView.render()
 
@@ -53,14 +54,16 @@ export const categoria = async () => {
       data: model.state.products,
     })
     productosPorCategoriaView.addHandler('click', onAddToCartBtnClick)
-  } catch (error) {
-    messageView.renderMessageOn(
-      productosPorCategoriaView.messageContainer(),
-      'error',
-      error.message,
-      true
-    )
-  } finally {
     loaderSpinnerView.remove()
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      messageView.renderMessageOn(
+        productosPorCategoriaView.messageContainer(),
+        'error',
+        'Ha ocurrido un error inesperado. Inténtelo nuevamente.',
+        true
+      )
+      loaderSpinnerView.remove()
+    }
   }
 }

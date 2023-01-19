@@ -13,7 +13,8 @@ class LoaderSpinnerView {
   }
 
   remove() {
-    document.querySelector('.loader-spinner').remove()
+    const spinner = document.querySelector('.loader-spinner')
+    if (spinner) spinner.remove()
   }
 
   removeTop() {
