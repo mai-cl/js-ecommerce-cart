@@ -1,46 +1,37 @@
-import loaderSpinnerView from '../views/loaderSpinnerView'
-import productosPorCategoriaView from '../views/productosPorCategoriaView'
-import error404View from '../views/error404View'
-import cartView from '../views/cartView'
 import model from '../model'
-import messageView from '../views/messageView'
+import categoriaPage from '../views/pages/categoria'
+import cartView from '../views/fixed/cartView'
+import mainView from '../views/fixed/mainView'
+import { MESSAGE, TYPE_MESSAGE } from '../utils/messages'
 
 const onAddToCartBtnClick = async e => {
   if (!e.target.matches('.itemcard__btn')) return
   const btn = e.target
   const productId = btn.dataset.id
 
-  loaderSpinnerView.renderTop()
+  mainView.renderBlockingLoaderSpinner()
 
   try {
     await model.getProductById(productId)
 
     if (model.state.targetProduct.stock < model.getItemQtyInCart(productId) + 1)
-      throw new Error('No hay stock suficiente!')
+      throw new Error(MESSAGE.ERROR_STOCK)
 
     model.addToCart()
     cartView.updateCartUI(model.state.cart)
-    messageView.renderMessageOn(
-      productosPorCategoriaView.messageContainer(),
-      'success',
-      'Producto agregado al carrito!'
-    )
+    mainView.renderMessage(TYPE_MESSAGE.SUCCESS, MESSAGE.SUCCESS_ADD_TO_CART)
   } catch (error) {
-    messageView.renderMessageOn(
-      productosPorCategoriaView.messageContainer(),
-      'error',
-      error.message
-    )
+    mainView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
-    loaderSpinnerView.removeTop()
+    mainView.removeLoaderSpinner()
   }
 }
 
 export const categoria = async () => {
   const pathname = location.pathname
   model.abortIncomingRequest()
-  messageView.removeMessageOn(productosPorCategoriaView.messageContainer())
-  loaderSpinnerView.render()
+  mainView.removeMessage()
+  mainView.renderLoaderSpinner()
 
   try {
     await model.getCategories()
@@ -49,21 +40,16 @@ export const categoria = async () => {
     )
 
     await model.getProductsByCategory(categoria.id)
-    productosPorCategoriaView.render({
+    categoriaPage.show({
       categoria: categoria.nombre,
       data: model.state.products,
     })
-    productosPorCategoriaView.addHandler('click', onAddToCartBtnClick)
-    loaderSpinnerView.remove()
+    categoriaPage.addHandler('click', onAddToCartBtnClick)
+    mainView.removeLoaderSpinner()
   } catch (error) {
     if (error.name !== 'AbortError') {
-      messageView.renderMessageOn(
-        productosPorCategoriaView.messageContainer(),
-        'error',
-        'Ha ocurrido un error inesperado. Inténtelo nuevamente.',
-        true
-      )
-      loaderSpinnerView.remove()
+      mainView.renderMessage(TYPE_MESSAGE.ERROR, MESSAGE.ERROR_DEFAULT, true)
+      mainView.removeLoaderSpinner()
     }
   }
 }

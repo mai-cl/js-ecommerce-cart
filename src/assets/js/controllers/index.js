@@ -1,13 +1,11 @@
-import '../views/cartView'
-import headerView from '../views/headerView'
-import mainView from '../views/mainView'
-import footerView from '../views/footerView'
+import headerView from '../views/fixed/headerView'
+import footerView from '../views/fixed/footerView'
 import model from '../model'
-import cartView from '../views/cartView'
-import loaderSpinnerView from '../views/loaderSpinnerView'
-import { routes } from '../routes'
-import Router from '../Router'
-import messageView from '../views/messageView'
+import cartView from '../views/fixed/cartView'
+import { routes } from '../router/routes'
+import Router from '../router/Router'
+import { MESSAGE, TYPE_MESSAGE } from '../utils/messages'
+import mainView from '../views/fixed/mainView'
 
 function onNavlinkClick(e) {
   const anchor = e.target.closest('a')
@@ -32,7 +30,7 @@ function onSubmitForm(e) {
 async function onControlInputClick(e) {
   if (!e.target.matches('.qty-selector__btn')) return
   const button = e.target
-  loaderSpinnerView.renderTop()
+  cartView.renderLoaderSpinner()
 
   try {
     await model.getProductById(button.dataset.id)
@@ -40,7 +38,7 @@ async function onControlInputClick(e) {
     if (!model.state.targetProduct.stock) {
       model.deleteItemCart(parseInt(model.state.targetProduct.id))
       cartView.updateCartUI(model.state.cart)
-      throw new Error('Producto sin stock!')
+      throw new Error(MESSAGE.ERROR_CART_STOCK)
     }
 
     model.checkEnoughStock(
@@ -52,13 +50,9 @@ async function onControlInputClick(e) {
     model.updateItemCartQty(cartView.getInputQty(button.dataset.id))
     cartView.updateCartUI(model.state.cart)
   } catch (error) {
-    messageView.renderMessageOn(
-      cartView.messageContainer(),
-      'error',
-      error.message
-    )
+    cartView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
-    loaderSpinnerView.removeTop()
+    cartView.removeLoaderSpinner()
   }
 }
 
@@ -66,7 +60,7 @@ async function onDeleteBtnClick(e) {
   if (!e.target.matches('.cart-item__delete-btn, .cart-item__delete-btn *'))
     return
   const button = e.target.closest('.cart-item__delete-btn')
-  loaderSpinnerView.renderTop()
+  cartView.renderLoaderSpinner()
 
   try {
     await model.getProductById(button.dataset.id)
@@ -74,13 +68,9 @@ async function onDeleteBtnClick(e) {
     const deletedItem = model.deleteItemCart(parseInt(button.dataset.id))
     cartView.updateCartUI(model.state.cart)
   } catch (error) {
-    messageView.renderMessageOn(
-      cartView.messageContainer(),
-      'error',
-      error.message
-    )
+    cartView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
-    loaderSpinnerView.removeTop()
+    cartView.removeLoaderSpinner()
   }
 }
 

@@ -1,4 +1,4 @@
-export function breadCrumbsView({ crumbs, activeCrumb, sectionClassname }) {
+export function BreadCrumbs({ crumbs, activeCrumb, sectionClassname }) {
   return `
   <div class="${sectionClassname} breadcrumbs">
     <a class="breadcrumbs__crumb navlink" href="/">Home</a>

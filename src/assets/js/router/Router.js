@@ -1,4 +1,4 @@
-import error404View from './views/error404View'
+import error404Page from '../views/pages/error404'
 
 class Router {
   constructor() {
@@ -62,7 +62,7 @@ class Router {
       }
     }
 
-    error404View.render()
+    error404Page.show()
   }
 }
 

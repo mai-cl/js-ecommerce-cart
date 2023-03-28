@@ -1,11 +1,12 @@
-import error404img from '../../img/404.png'
+import error404img from '../../../img/404.png'
+import Page from './Page'
 
-class Error404View {
-  render() {
-    document.getElementById('main').innerHTML = this.#generateMarkup()
+class Error404 extends Page {
+  show() {
+    this._parentElement.innerHTML = this._generateMarkup()
   }
 
-  #generateMarkup() {
+  _generateMarkup() {
     return `
       <section class="section-error">
         <div class="section-error__container container">
@@ -19,4 +20,4 @@ class Error404View {
   }
 }
 
-export default new Error404View()
+export default new Error404()

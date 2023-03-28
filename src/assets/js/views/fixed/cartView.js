@@ -1,10 +1,12 @@
-import messageView from './messageView'
+import LoaderSpinner from '../components/LoaderSpinner'
+import messageManager from '../utils/messagesManager'
 
 const cart = document.querySelector('.cart')
 const cartMessages = document.querySelector('.cart__messages')
 const cartBodyContainer = document.querySelector('.cart__body .container')
 const openCartBtn = document.getElementById('open-cart-btn')
 const closeCartBtn = document.getElementById('close-cart-btn')
+const body = document.querySelector('body')
 
 function setUIhandlers() {
   openCartBtn.addEventListener('click', () => {
@@ -19,6 +21,15 @@ function setUIhandlers() {
     if (e.target.matches('.cart__modal, .cart__modal *')) return
     cart.classList.remove('show')
   })
+}
+
+function renderLoaderSpinner() {
+  body.insertAdjacentHTML('beforeend', `${LoaderSpinner(true)}`)
+}
+
+function removeLoaderSpinner() {
+  const spinner = body.querySelector('.loader-spinner')
+  if (spinner) spinner.remove()
 }
 
 function closeCart() {
@@ -40,7 +51,7 @@ function cleanContainer() {
 function updateCartUI(data) {
   cleanContainer()
   if (data.items.length === 0) {
-    messageView.renderMessageOn(
+    messageManager.renderMessageOn(
       cartMessages,
       'info',
       'No hay items en el carrito!',
@@ -48,7 +59,7 @@ function updateCartUI(data) {
     )
     return
   }
-  messageView.removeMessageOn(cartMessages)
+  messageManager.removeMessageOn(cartMessages)
   cartBodyContainer.insertAdjacentHTML('beforeend', generateMarkup(data))
 }
 
@@ -71,6 +82,10 @@ function decreaseQty(itemId) {
   )
   if (parseInt(input.value) === 1) return
   input.value--
+}
+
+function renderMessage(type, text) {
+  messageManager.renderMessageOn(cartMessages, type, text)
 }
 
 function generateMarkup(data) {
@@ -146,4 +161,7 @@ export default {
   decreaseQty,
   messageContainer,
   closeCart,
+  renderMessage,
+  renderLoaderSpinner,
+  removeLoaderSpinner,
 }

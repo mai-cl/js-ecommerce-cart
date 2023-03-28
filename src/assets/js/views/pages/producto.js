@@ -1,7 +1,10 @@
-import { breadCrumbsView } from './breadCrumbsView'
-import messageView from './messageView'
+import { BreadCrumbs } from '../components/BreadCrumbs'
 
-class ProductoView {
+import Page from './Page'
+
+class Producto extends Page {
+  _idSelector = 'section-producto'
+
   increaseQty() {
     document.querySelector('.qty-selector__input').value++
   }
@@ -16,46 +19,34 @@ class ProductoView {
     return parseInt(document.querySelector('.qty-selector__input').value)
   }
 
-  addHandler(event, handler) {
-    document.querySelector('.section-producto').addEventListener(event, handler)
-  }
-
-  showSuccessAddToCartMsj() {
-    messageView.renderSuccessMessage('Producto agregado al carrito!')
-  }
-
-  render(item) {
-    document
-      .getElementById('main')
-      .insertAdjacentHTML('beforeend', this.#generateMarkup(item))
-  }
-
-  #generateMarkup(item) {
+  _generateMarkup() {
+    const { categoria, nombre, urlImage, stock, precio, id, especificaciones } =
+      this._data
     return `
-      <section class="section-producto">
+      <section class="section-producto" id=${this._idSelector}>
         <div class="section-producto__container container">
-          ${breadCrumbsView({
+          ${BreadCrumbs({
             crumbs: [
               {
-                name: item.categoria.nombre,
-                pathname: item.categoria.pathname,
+                name: categoria.nombre,
+                pathname: categoria.pathname,
               },
             ],
-            activeCrumb: { name: item.nombre },
+            activeCrumb: { name: nombre },
             sectionClassname: 'section-producto__breadcrumbs',
           })}
           
           <div class="section-producto__img">
-            <img src=${item.urlImage} alt=${item.nombre} />
+            <img src=${urlImage} alt=${nombre} />
           </div>
           <div class="section-producto__maininfo">
             <h2 class="section-producto__title heading-2">
-              ${item.nombre}
+              ${nombre}
             </h2>
             <div class="section-producto__stock">${
-              item.stock ? 'Stock Disponible' : 'Sin Stock'
+              stock ? 'Stock Disponible' : 'Sin Stock'
             }</div>
-            <div class="section-producto__price">$${item.precio}</div>
+            <div class="section-producto__price">$${precio}</div>
             <div class="section-producto__areabtn">
               <div class="qty-selector">
                 <button class="qty-selector__btn qty-selector__btn--dec" data-action="decreaseQty">
@@ -75,7 +66,7 @@ class ProductoView {
                   +
                 </button>
               </div>
-              <button class="btn section-producto__btn" data-id="${item.id}">
+              <button class="btn section-producto__btn" data-id="${id}">
                 Sumar al carrito
               </button>
             </div>
@@ -83,7 +74,7 @@ class ProductoView {
           <div class="section-producto__description">
             <h3>Especificaciones del Producto</h3>
             <div class="specs">
-              ${this.#generateSpecsMarkup(item.especificaciones)}
+              ${this._generateSpecsMarkup(especificaciones)}
             </div>
           </div>
         </div>
@@ -91,11 +82,7 @@ class ProductoView {
     `
   }
 
-  messageContainer() {
-    return document.querySelector('.messages')
-  }
-
-  #generateSpecsMarkup(specs) {
+  _generateSpecsMarkup(specs) {
     return specs
       .map(
         specType => `
@@ -114,4 +101,4 @@ class ProductoView {
   }
 }
 
-export default new ProductoView()
+export default new Producto()

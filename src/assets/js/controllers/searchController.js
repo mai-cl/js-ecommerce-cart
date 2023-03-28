@@ -1,9 +1,9 @@
 import model from '../model'
-import error404View from '../views/error404View'
-import loaderSpinnerView from '../views/loaderSpinnerView'
-import searchProductosView from '../views/searchProductosView'
-import cartView from '../views/cartView'
-import messageView from '../views/messageView'
+import error404View from '../views/pages/error404'
+import searchProductosView from '../views/pages/searchProductos'
+import cartView from '../views/fixed/cartView'
+import mainView from '../views/fixed/mainView'
+import { MESSAGE, TYPE_MESSAGE } from '../utils/messages'
 
 const getQueryValue = () => {
   const result = location.search.match(/query=([^&]*)/)
@@ -14,54 +14,42 @@ const onAddToCartBtnClick = async e => {
   if (!e.target.matches('.itemcard__btn')) return
   const btn = e.target
   const productId = btn.dataset.id
-  loaderSpinnerView.renderTop()
+  mainView.renderBlockingLoaderSpinner()
 
   try {
     await model.getProductById(productId)
 
     if (model.state.targetProduct.stock < model.getItemQtyInCart(productId) + 1)
-      throw new Error('No hay stock suficiente!')
+      throw new Error(MESSAGE.ERROR_STOCK)
 
     const addedItem = model.addToCart()
     cartView.updateCartUI(model.state.cart)
 
-    messageView.renderMessageOn(
-      searchProductosView.messageContainer(),
-      'success',
-      'Producto agregado al carrito!'
-    )
+    mainView.renderMessage(TYPE_MESSAGE.SUCCESS, MESSAGE.SUCCESS_ADD_TO_CART)
   } catch (error) {
-    messageView.renderMessageOn(
-      searchProductosView.messageContainer(),
-      'error',
-      error.message
-    )
+    mainView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
-    loaderSpinnerView.removeTop()
+    mainView.removeLoaderSpinner()
   }
 }
 
 export const search = async () => {
   const query = getQueryValue()
-  if (!query) return error404View.render()
+  if (!query) return error404View.show()
   model.abortIncomingRequest()
-  loaderSpinnerView.render()
-  messageView.removeMessageOn(searchProductosView.messageContainer())
+  mainView.renderLoaderSpinner()
+
+  mainView.removeMessage()
 
   try {
     await model.getProductsByQuery(query)
-    searchProductosView.render({ query, data: model.state.products })
+    searchProductosView.show({ query, data: model.state.products })
     searchProductosView.addHandler('click', onAddToCartBtnClick)
-    loaderSpinnerView.remove()
+    mainView.removeLoaderSpinner()
   } catch (error) {
     if (error.name !== 'AbortError') {
-      messageView.renderMessageOn(
-        searchProductosView.messageContainer(),
-        'error',
-        'Ha ocurrido un error inesperado. Inténtelo nuevamente.',
-        true
-      )
-      loaderSpinnerView.remove()
+      mainView.renderMessage(TYPE_MESSAGE.ERROR, MESSAGE.ERROR_DEFAULT, true)
+      mainView.removeLoaderSpinner()
     }
   }
 }

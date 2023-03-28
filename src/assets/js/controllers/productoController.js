@@ -1,10 +1,10 @@
 import model from '../model'
-import loaderSpinnerView from '../views/loaderSpinnerView'
-import productoView from '../views/productoView'
-import cartView from '../views/cartView'
-import error404View from '../views/error404View'
-import Router from '../Router'
-import messageView from '../views/messageView'
+import productoView from '../views/pages/producto'
+import cartView from '../views/fixed/cartView'
+import error404View from '../views/pages/error404'
+import Router from '../router/Router'
+import mainView from '../views/fixed/mainView'
+import { MESSAGE, TYPE_MESSAGE } from '../utils/messages'
 
 const onAddToCartBtnClick = async e => {
   if (!e.target.matches('.section-producto__btn')) return
@@ -12,7 +12,7 @@ const onAddToCartBtnClick = async e => {
   const productId = btn.dataset.id
   const qty = productoView.getInputQty()
 
-  loaderSpinnerView.renderTop()
+  mainView.renderBlockingLoaderSpinner()
 
   try {
     await model.getProductById(productId)
@@ -21,24 +21,16 @@ const onAddToCartBtnClick = async e => {
       model.state.targetProduct.stock <
       qty + model.getItemQtyInCart(productId)
     ) {
-      throw new Error('No hay stock suficiente!')
+      throw new Error(MESSAGE.ERROR_STOCK)
     }
 
     model.addToCart(qty)
     cartView.updateCartUI(model.state.cart)
-    messageView.renderMessageOn(
-      productoView.messageContainer(),
-      'success',
-      'Producto agregado al carrito!'
-    )
+    mainView.renderMessage(TYPE_MESSAGE.SUCCESS, MESSAGE.SUCCESS_ADD_TO_CART)
   } catch (error) {
-    messageView.renderMessageOn(
-      productoView.messageContainer(),
-      'error',
-      error.message
-    )
+    mainView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
-    loaderSpinnerView.removeTop()
+    mainView.removeLoaderSpinner()
   }
 }
 
@@ -50,25 +42,21 @@ const onControlInputClick = e => {
 
 export const producto = async () => {
   model.abortIncomingRequest()
-  loaderSpinnerView.render()
-  messageView.removeMessageOn(productoView.messageContainer())
+  mainView.renderLoaderSpinner()
+  mainView.removeMessage()
 
   try {
     await model.getProductByPathparam(Router.dynamicParams.productSlug)
-    if (!model.state.targetProduct) return error404View.render()
-    productoView.render(model.state.targetProduct)
+    if (!model.state.targetProduct) return error404View.show()
+    productoView.show(model.state.targetProduct)
     productoView.addHandler('click', onControlInputClick)
     productoView.addHandler('click', onAddToCartBtnClick)
-    loaderSpinnerView.remove()
+    mainView.removeLoaderSpinner()
   } catch (error) {
+    console.log(error)
     if (error.name !== 'AbortError') {
-      messageView.renderMessageOn(
-        productoView.messageContainer(),
-        'error',
-        'Ha ocurrido un error inesperado. Inténtelo nuevamente.',
-        true
-      )
-      loaderSpinnerView.remove()
+      mainView.renderMessage(TYPE_MESSAGE.ERROR, MESSAGE.ERROR_DEFAULT, true)
+      mainView.removeLoaderSpinner()
     }
   }
 }

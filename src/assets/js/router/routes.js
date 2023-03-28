@@ -1,7 +1,7 @@
-import { categoria } from './controllers/categoriaController'
-import { home } from './controllers/homeController'
-import { producto } from './controllers/productoController'
-import { search } from './controllers/searchController'
+import { categoria } from '../controllers/categoriaController'
+import { home } from '../controllers/homeController'
+import { producto } from '../controllers/productoController'
+import { search } from '../controllers/searchController'
 
 export const routes = [
   {

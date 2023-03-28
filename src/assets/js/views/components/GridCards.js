@@ -1,4 +1,4 @@
-function gridCardsView(data) {
+function GridCards(data) {
   return `
     <div class="grid-productos">
       ${data
@@ -28,4 +28,4 @@ function gridCardsView(data) {
   `
 }
 
-export default gridCardsView
+export default GridCards
