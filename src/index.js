@@ -4,9 +4,9 @@ import style from './assets/scss/main.scss'
 import {
   initRouter,
   loadCartData,
-  setInitialHandlers,
-} from './assets/js/controllers'
+  setAppHandlers,
+} from './assets/js/controllers/mainController'
 
 initRouter()
 loadCartData()
-setInitialHandlers()
+setAppHandlers()

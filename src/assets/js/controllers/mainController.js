@@ -9,10 +9,10 @@ import mainView from '../views/fixed/mainView'
 
 function onNavlinkClick(e) {
   const anchor = e.target.closest('a')
+
   if (!anchor) return
   e.preventDefault()
-  history.pushState({}, '', anchor.href)
-
+  Router.updateHistoryStack(anchor.href)
   Router.dispatchNavEvent()
 }
 
@@ -20,18 +20,19 @@ function onSubmitForm(e) {
   e.preventDefault()
   const form = e.target
   const inputValue = form.search.value
+
   form.search.blur()
   headerView.hideSearchBar()
   headerView.hideResponsiveNav()
-  history.pushState({}, '', `/search?query=${inputValue}`)
+  Router.updateHistoryStack(`/search?query=${inputValue}`)
   Router.dispatchNavEvent()
 }
 
 async function onControlInputClick(e) {
   if (!e.target.matches('.qty-selector__btn')) return
   const button = e.target
-  cartView.renderLoaderSpinner()
 
+  cartView.renderLoaderSpinner()
   try {
     await model.getProductById(button.dataset.id)
 
@@ -74,7 +75,7 @@ async function onDeleteBtnClick(e) {
   }
 }
 
-export function setInitialHandlers() {
+export function setAppHandlers() {
   window.addEventListener('popstate', () => {
     headerView.hideSearchBar()
     headerView.hideResponsiveNav()
@@ -85,6 +86,7 @@ export function setInitialHandlers() {
   headerView.addHandler('submit', onSubmitForm)
   mainView.addHandler('click', onNavlinkClick)
   footerView.addHandler('click', onNavlinkClick)
+  cartView.setUIhandlers()
   cartView.addHandler('click', onControlInputClick)
   cartView.addHandler('click', onDeleteBtnClick)
 }

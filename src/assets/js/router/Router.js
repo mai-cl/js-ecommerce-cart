@@ -20,6 +20,10 @@ class Router {
     this.resolve(this.routes, path)
   }
 
+  updateHistoryStack(url) {
+    history.pushState({}, '', url)
+  }
+
   setPathParam(paramName, paramValue) {
     this.dynamicParams[paramName] = paramValue
   }

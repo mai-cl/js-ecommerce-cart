@@ -151,9 +151,8 @@ function messageContainer() {
   return document.querySelector('.cart__messages')
 }
 
-setUIhandlers()
-
 export default {
+  setUIhandlers,
   updateCartUI,
   getInputQty,
   addHandler,
