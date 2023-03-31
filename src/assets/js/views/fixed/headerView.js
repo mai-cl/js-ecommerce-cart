@@ -4,6 +4,7 @@ const navContent = document.getElementById('nav-main')
 const openSearchFormBtn = document.querySelector('.header__button--search-resp')
 const closeSearchFormBtn = document.getElementById('close-form-btn')
 const searchSectionResp = document.querySelector('.header__search-section-resp')
+const loginWithGoogleBtn = document.getElementById('login-with-google-btn')
 
 function addHandler(event, handler) {
   document.querySelector('header').addEventListener(event, handler)

@@ -1,5 +1,15 @@
 import { API_URL } from './config'
 import { abortRequest, getJSON } from './api'
+import {
+  auth,
+  googleAuthProvider,
+  signInWithPopup,
+} from '../../firebase/firebaseConfig'
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth'
 
 const state = {
   targetProduct: null,
@@ -127,6 +137,62 @@ async function getProductByPathparam(pathParam) {
   state.targetProduct = data[0]
 }
 
+/* async function loginWithGoogle() {
+  try {
+    const response = await signInWithPopup(auth, googleAuthProvider)
+    state.user = {
+      userId: response.user.uid,
+      displayName: response.user.displayName,
+    }
+    console.log(response)
+  } catch (error) {
+    throw error
+  }
+} */
+
+async function loginWithEmailAndPassword(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    )
+    state.user = {
+      userId: response.user.uid,
+      displayName: response.user.displayName,
+    }
+    console.log(userCredential)
+  } catch (error) {
+    throw error
+  }
+}
+
+async function logoutUser() {
+  try {
+    await signOut(auth)
+    state.user = {}
+  } catch (error) {
+    throw error
+  }
+}
+
+async function registerUser(email, password, name) {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    )
+    state.user = {
+      userId: response.user.uid,
+      displayName: response.user.displayName,
+    }
+    console.log(userCredential)
+  } catch (error) {
+    throw error
+  }
+}
+
 export default {
   state,
   getItemQtyInCart,
@@ -143,4 +209,8 @@ export default {
   checkEnoughStock,
   loadLocalSt,
   abortIncomingRequest,
+  loginWithGoogle,
+  registerUser,
+  loginWithEmailAndPassword,
+  logoutUser,
 }

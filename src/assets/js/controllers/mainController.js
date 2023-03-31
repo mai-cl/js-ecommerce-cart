@@ -75,6 +75,67 @@ async function onDeleteBtnClick(e) {
   }
 }
 
+/* async function onLoginWithGoogle(e) {
+  mainView.renderBlockingLoaderSpinner()
+
+  try {
+    await model.loginWithGoogle()
+    Router.updateHistoryStack(`/account`)
+    Router.dispatchNavEvent()
+  } catch (error) {
+    console.error(error)
+  } finally {
+    mainView.removeLoaderSpinner()
+  }
+} */
+async function onLoginWithEmailAndPassword(e) {
+  e.preventDefault()
+  mainView.renderBlockingLoaderSpinner()
+  const { email, password } = loginPage.getFormData()
+
+  try {
+    await model.loginWithEmailAndPassword(email, password)
+    Router.updateHistoryStack(`/account`)
+    Router.dispatchNavEvent()
+    console.log('You are successfully logged!')
+  } catch (error) {
+    console.error(error)
+  } finally {
+    mainView.removeLoaderSpinner()
+  }
+}
+
+async function onRegisterUser(e) {
+  e.preventDefault()
+  mainView.renderBlockingLoaderSpinner()
+
+  const { email, password, name } = registerPage.getFormData()
+
+  try {
+    await model.registerUser(email, password, name)
+    Router.updateHistoryStack(`/`)
+    Router.dispatchNavEvent()
+    console.log('You are successfully registered!')
+  } catch (error) {
+    console.error(error)
+  } finally {
+    mainView.removeLoaderSpinner()
+  }
+}
+
+async function onLogoutUser(e) {
+  mainView.renderBlockingLoaderSpinner()
+  try {
+    await model.logoutUser()
+    Router.updateHistoryStack(`/`)
+    Router.dispatchNavEvent()
+  } catch (error) {
+    console.error(error)
+  } finally {
+    mainView.removeLoaderSpinner()
+  }
+}
+
 export function setAppHandlers() {
   window.addEventListener('popstate', () => {
     headerView.hideSearchBar()
@@ -84,6 +145,7 @@ export function setAppHandlers() {
   })
   headerView.addHandler('click', onNavlinkClick)
   headerView.addHandler('submit', onSubmitForm)
+
   mainView.addHandler('click', onNavlinkClick)
   footerView.addHandler('click', onNavlinkClick)
   cartView.setUIhandlers()
