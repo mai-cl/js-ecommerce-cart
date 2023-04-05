@@ -7,6 +7,7 @@ import {
 } from '../../firebase/firebaseConfig'
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth'
@@ -21,7 +22,11 @@ const state = {
     subtotal: null,
     quantity: null,
   },
+  user: {},
+  orders: [],
 }
+
+window.state = state
 
 function abortIncomingRequest() {
   abortRequest()
@@ -137,19 +142,6 @@ async function getProductByPathparam(pathParam) {
   state.targetProduct = data[0]
 }
 
-/* async function loginWithGoogle() {
-  try {
-    const response = await signInWithPopup(auth, googleAuthProvider)
-    state.user = {
-      userId: response.user.uid,
-      displayName: response.user.displayName,
-    }
-    console.log(response)
-  } catch (error) {
-    throw error
-  }
-} */
-
 async function loginWithEmailAndPassword(email, password) {
   try {
     const userCredential = await signInWithEmailAndPassword(
@@ -158,8 +150,9 @@ async function loginWithEmailAndPassword(email, password) {
       password
     )
     state.user = {
-      userId: response.user.uid,
-      displayName: response.user.displayName,
+      userId: userCredential.user.uid,
+      displayName: userCredential.user.displayName,
+      email: userCredential.user.email,
     }
     console.log(userCredential)
   } catch (error) {
@@ -184,13 +177,48 @@ async function registerUser(email, password, name) {
       password
     )
     state.user = {
-      userId: response.user.uid,
-      displayName: response.user.displayName,
+      userId: userCredential.user.uid,
+      displayName: userCredential.user.displayName,
+      email: userCredential.user.email,
     }
     console.log(userCredential)
   } catch (error) {
     throw error
   }
+}
+
+function setLoginStateObserver({ onLoggedUser, onLoggedOutUser }) {
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      state.user = {
+        userId: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+      }
+      onLoggedUser()
+    } else {
+      state.user = {}
+      onLoggedOutUser()
+    }
+  })
+}
+
+async function getUserOrders() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      state.orders = [
+        {
+          id: '1',
+          totalCost: 120000,
+        },
+        {
+          id: '2',
+          totalCost: 330000,
+        },
+      ]
+      resolve()
+    }, 2000)
+  })
 }
 
 export default {
@@ -209,8 +237,9 @@ export default {
   checkEnoughStock,
   loadLocalSt,
   abortIncomingRequest,
-  loginWithGoogle,
+  setLoginStateObserver,
   registerUser,
   loginWithEmailAndPassword,
   logoutUser,
+  getUserOrders,
 }

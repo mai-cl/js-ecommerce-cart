@@ -25,7 +25,7 @@
             <input
               type="text"
               name="search"
-              id="search"
+              id="search-resp"
               class="header__searchinput"
               placeholder="Buscar"
             />
@@ -60,8 +60,20 @@
             <button class="btn header__button header__button--search-resp">
               <i class="fas fa-search"></i>
             </button>
-            <button class="btn header__button" id="login-with-google-btn">
+            <button class="btn header__button" id="header-user-btn">
               <i class="far fa-user"></i>
+              <ul class="header__sublist">
+                <li class="header__sublist-item">
+                  <a class="header__sublist-anchor" href="/login"
+                    >Iniciar sesión</a
+                  >
+                </li>
+                <li class="header__sublist-item">
+                  <a class="header__sublist-anchor" href="/register"
+                    >Crear cuenta</a
+                  >
+                </li>
+              </ul>
             </button>
             <button class="btn header__button" id="open-cart-btn">
               <i class="fas fa-shopping-cart"></i>

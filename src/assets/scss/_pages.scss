@@ -122,3 +122,32 @@
     text-align: center;
   }
 }
+
+.section-auth {
+  padding: 3.2rem 0;
+
+  &__container {
+    max-width: 72rem;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.4rem;
+  }
+
+  &__submit-btn {
+    color: var(--color-grey-light-1);
+    background-color: var(--color-primary-light);
+    transition: color 0.3s, background-color 0.3s;
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-accent-1);
+    }
+  }
+}
+
+.section-account {
+  padding: 3.2rem 0;
+}

@@ -29,6 +29,10 @@ function removeLoaderSpinner() {
   body.querySelector('.loader-spinner').remove()
 }
 
+function clear() {
+  main.innerHTML = ''
+}
+
 export default {
   addHandler,
   removeMessage,
@@ -36,4 +40,5 @@ export default {
   renderLoaderSpinner,
   removeLoaderSpinner,
   renderBlockingLoaderSpinner,
+  clear,
 }

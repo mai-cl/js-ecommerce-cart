@@ -201,7 +201,7 @@
   &__searchinput {
     border-radius: 0.5rem;
     height: 4.2rem;
-    width: 34rem;
+    width: 30rem;
     border: none;
     padding: 0.4rem 1.2rem;
 
@@ -297,7 +297,7 @@
 
   &__icons {
     display: flex;
-    gap: 2.4rem;
+    gap: 1.2rem;
     color: var(--color-grey-light-1);
 
     @include respond(md-screen) {
@@ -308,13 +308,18 @@
 
   &__button {
     background-color: transparent;
-    padding: 0;
+    position: relative;
+    padding: 0.8rem;
     font-size: 1.8rem;
     color: var(--color-grey-light-1);
     transition: color 0.3s;
 
     &:hover {
       color: var(--color-accent-1);
+
+      & > .header__sublist {
+        display: flex;
+      }
     }
 
     @include respond(md-screen) {
@@ -328,6 +333,38 @@
       @include respond(md-screen) {
         display: block;
       }
+    }
+  }
+
+  &__sublist {
+    display: none;
+    position: absolute;
+    right: 50%;
+    top: 100%;
+    transform: translateX(50%);
+    width: max-content;
+    border-radius: 0.5rem;
+    background-color: var(--color-primary-light);
+    padding: 0.4rem 0;
+    flex-direction: column;
+    row-gap: 0.4rem;
+  }
+
+  &__sublist-item {
+    list-style: none;
+  }
+
+  &__sublist-anchor {
+    width: 100%;
+    color: var(--color-grey-light-1);
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.6rem;
+    padding: 0.4rem 1.2rem;
+    transition: color 0.3s;
+
+    &:hover {
+      color: var(--color-accent-1);
     }
   }
 }

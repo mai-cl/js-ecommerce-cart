@@ -75,65 +75,29 @@ async function onDeleteBtnClick(e) {
   }
 }
 
-/* async function onLoginWithGoogle(e) {
-  mainView.renderBlockingLoaderSpinner()
-
-  try {
-    await model.loginWithGoogle()
-    Router.updateHistoryStack(`/account`)
-    Router.dispatchNavEvent()
-  } catch (error) {
-    console.error(error)
-  } finally {
-    mainView.removeLoaderSpinner()
-  }
-} */
-async function onLoginWithEmailAndPassword(e) {
-  e.preventDefault()
-  mainView.renderBlockingLoaderSpinner()
-  const { email, password } = loginPage.getFormData()
-
-  try {
-    await model.loginWithEmailAndPassword(email, password)
-    Router.updateHistoryStack(`/account`)
-    Router.dispatchNavEvent()
-    console.log('You are successfully logged!')
-  } catch (error) {
-    console.error(error)
-  } finally {
-    mainView.removeLoaderSpinner()
-  }
-}
-
-async function onRegisterUser(e) {
-  e.preventDefault()
-  mainView.renderBlockingLoaderSpinner()
-
-  const { email, password, name } = registerPage.getFormData()
-
-  try {
-    await model.registerUser(email, password, name)
-    Router.updateHistoryStack(`/`)
-    Router.dispatchNavEvent()
-    console.log('You are successfully registered!')
-  } catch (error) {
-    console.error(error)
-  } finally {
-    mainView.removeLoaderSpinner()
-  }
-}
-
 async function onLogoutUser(e) {
+  if (!e.target.matches('#logout-btn')) return
   mainView.renderBlockingLoaderSpinner()
   try {
     await model.logoutUser()
+    mainView.removeLoaderSpinner()
     Router.updateHistoryStack(`/`)
     Router.dispatchNavEvent()
+    /* headerView.setLoggedOutUserOptions() */
   } catch (error) {
-    console.error(error)
-  } finally {
     mainView.removeLoaderSpinner()
+    console.error(error)
   }
+}
+
+export function checkLoginUser() {
+  model.setLoginStateObserver({
+    onLoggedUser: () => {
+      headerView.setLoggedUserOptions()
+      headerView.addHandler('click', onLogoutUser)
+    },
+    onLoggedOutUser: headerView.setLoggedOutUserOptions,
+  })
 }
 
 export function setAppHandlers() {

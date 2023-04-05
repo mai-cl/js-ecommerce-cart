@@ -2,6 +2,7 @@ import normalize from 'normalize.css'
 import style from './assets/scss/main.scss'
 
 import {
+  checkLoginUser,
   initRouter,
   loadCartData,
   setAppHandlers,
@@ -10,3 +11,4 @@ import {
 initRouter()
 loadCartData()
 setAppHandlers()
+checkLoginUser()
