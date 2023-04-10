@@ -4,7 +4,6 @@ import mainView from '../views/fixed/mainView'
 import accountPage from '../views/pages/account'
 
 export const account = async () => {
-  model.abortIncomingRequest()
   mainView.removeMessage()
 
   mainView.renderLoaderSpinner()

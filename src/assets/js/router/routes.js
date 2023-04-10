@@ -5,11 +5,16 @@ import { register } from '../controllers/registerController'
 import { login } from '../controllers/loginController'
 import { search } from '../controllers/searchController'
 import { account } from '../controllers/accountController'
+import { checkout } from '../controllers/checkoutController'
 
 export const routes = [
   {
     path: '',
     action: () => home(),
+  },
+  {
+    path: 'checkout',
+    action: () => checkout()
   },
   {
     path: 'search',

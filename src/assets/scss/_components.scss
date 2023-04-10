@@ -320,6 +320,9 @@
   &__main-btn {
     background-color: var(--color-primary);
     color: var(--color-grey-light-1);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
   }
 }
 

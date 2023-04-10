@@ -6,6 +6,8 @@ import { routes } from '../router/routes'
 import Router from '../router/Router'
 import { MESSAGE, TYPE_MESSAGE } from '../utils/messages'
 import mainView from '../views/fixed/mainView'
+import checkoutPage from '../views/pages/checkout'
+import { auth } from '../../../firebase/firebaseConfig'
 
 function onNavlinkClick(e) {
   const anchor = e.target.closest('a')
@@ -50,6 +52,7 @@ async function onControlInputClick(e) {
     cartView[button.dataset.action](button.dataset.id)
     model.updateItemCartQty(cartView.getInputQty(button.dataset.id))
     cartView.updateCartUI(model.state.cart)
+    if(location.pathname === '/checkout') checkoutPage.updateCheckoutSummary(model.state.cart)
   } catch (error) {
     cartView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
@@ -68,6 +71,7 @@ async function onDeleteBtnClick(e) {
     if (!model.state.targetProduct) return
     const deletedItem = model.deleteItemCart(parseInt(button.dataset.id))
     cartView.updateCartUI(model.state.cart)
+    if(location.pathname === '/checkout') checkoutPage.updateCheckoutSummary(model.state.cart)
   } catch (error) {
     cartView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
@@ -83,24 +87,35 @@ async function onLogoutUser(e) {
     mainView.removeLoaderSpinner()
     Router.updateHistoryStack(`/`)
     Router.dispatchNavEvent()
-    /* headerView.setLoggedOutUserOptions() */
   } catch (error) {
     mainView.removeLoaderSpinner()
     console.error(error)
   }
 }
 
-export function checkLoginUser() {
-  model.setLoginStateObserver({
-    onLoggedUser: () => {
-      headerView.setLoggedUserOptions()
+function checkLoginUser() {
+  return new Promise((resolve, reject) => {
+    auth.onAuthStateChanged(user => {
+      if(user) {
+        model.state.user = {
+          userId: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+        }
+        headerView.setLoggedUserOptions()
       headerView.addHandler('click', onLogoutUser)
-    },
-    onLoggedOutUser: headerView.setLoggedOutUserOptions,
+      } else {
+        model.state.user = {}
+        headerView.setLoggedOutUserOptions()
+      }
+      resolve(user)
+    }, err => {
+      reject(err)
+    })
   })
 }
 
-export function setAppHandlers() {
+function setAppHandlers() {
   window.addEventListener('popstate', () => {
     headerView.hideSearchBar()
     headerView.hideResponsiveNav()
@@ -112,16 +127,28 @@ export function setAppHandlers() {
 
   mainView.addHandler('click', onNavlinkClick)
   footerView.addHandler('click', onNavlinkClick)
+  cartView.addHandler('click', onNavlinkClick)
   cartView.setUIhandlers()
   cartView.addHandler('click', onControlInputClick)
   cartView.addHandler('click', onDeleteBtnClick)
+
 }
 
-export function initRouter() {
+function initRouter() {
   Router.init(routes)
 }
 
-export function loadCartData() {
+function loadCartData() {
   model.loadLocalSt()
   cartView.updateCartUI(model.state.cart)
+}
+
+export function initApp() {
+  mainView.renderBlockingLoaderSpinner()
+  checkLoginUser().then(() => {
+    mainView.removeLoaderSpinner()
+    initRouter()
+  })
+  loadCartData()
+  setAppHandlers()
 }

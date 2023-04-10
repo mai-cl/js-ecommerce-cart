@@ -2,14 +2,12 @@ import { API_URL } from './config'
 import { abortRequest, getJSON } from './api'
 import {
   auth,
-  googleAuthProvider,
-  signInWithPopup,
 } from '../../firebase/firebaseConfig'
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from 'firebase/auth'
 
 const state = {
@@ -65,6 +63,15 @@ function addToCart(qty = 1) {
     saveInLocalSt()
     return newItem
   }
+}
+
+function clearCart() {
+  state.cart = {
+    items: [],
+    subtotal: null,
+    quantity: null,
+  },
+  saveInLocalSt()
 }
 
 function updateItemCartQty(qty) {
@@ -176,9 +183,10 @@ async function registerUser(email, password, name) {
       email,
       password
     )
+    await updateProfile(auth.currentUser, {displayName: name})
     state.user = {
       userId: userCredential.user.uid,
-      displayName: userCredential.user.displayName,
+      displayName: auth.currentUser.displayName,
       email: userCredential.user.email,
     }
     console.log(userCredential)
@@ -187,38 +195,45 @@ async function registerUser(email, password, name) {
   }
 }
 
-function setLoginStateObserver({ onLoggedUser, onLoggedOutUser }) {
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      state.user = {
-        userId: user.uid,
-        displayName: user.displayName,
-        email: user.email,
-      }
-      onLoggedUser()
-    } else {
-      state.user = {}
-      onLoggedOutUser()
-    }
-  })
-}
 
 async function getUserOrders() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      state.orders = [
-        {
-          id: '1',
-          totalCost: 120000,
-        },
-        {
-          id: '2',
-          totalCost: 330000,
-        },
-      ]
-      resolve()
-    }, 2000)
-  })
+  try {
+    const orders = await getJSON(`${API_URL}/compras?userId=${state.user.userId}&_sort=date&_order=desc`)
+    state.orders = orders
+  } catch (error) {
+    throw error
+  }
+}
+
+function getCart() {
+  return JSON.parse(localStorage.getItem('cart'))
+}
+
+async function confirmBuy({name, email, phone}) {
+  const cart = JSON.parse(localStorage.getItem('cart')) //{items, subtotal, quantity}
+  const userId = state.user.userId
+  const date = new Date()
+
+  try {
+    const response = await fetch(`${API_URL}/compras`, {
+      headers: new Headers({'content-type': 'application/json'}),
+      method: 'POST',
+      body: JSON.stringify({
+        userId: userId,
+        name: name,
+        email: email,
+        phone: phone,
+        date: date,
+        totalCost: cart.subtotal,
+        items: cart.items
+      })
+    })
+    const data = await response.json()
+    return data.id
+    
+  } catch (error) {
+    throw error
+  }
 }
 
 export default {
@@ -237,9 +252,12 @@ export default {
   checkEnoughStock,
   loadLocalSt,
   abortIncomingRequest,
-  setLoginStateObserver,
+  
   registerUser,
   loginWithEmailAndPassword,
   logoutUser,
   getUserOrders,
+  getCart,
+  confirmBuy,
+  clearCart
 }

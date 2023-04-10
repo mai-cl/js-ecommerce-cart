@@ -100,9 +100,9 @@ function generateMarkup(data) {
       <span class="cart__subtotal-value">$${subtotal}</span>
     </div>
     <hr class="mb-md" />
-    <button class="cart__main-btn btn btn--full-width">
+    <a class="cart__main-btn btn btn--full-width" href="/checkout">
       Iniciar Compra
-    </button>
+    </a>
   `
 }
 
@@ -150,6 +150,8 @@ function generateMarkupItems(data) {
 function messageContainer() {
   return document.querySelector('.cart__messages')
 }
+
+
 
 export default {
   setUIhandlers,
