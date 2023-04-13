@@ -150,8 +150,127 @@
 
 .section-account {
   padding: 3.2rem 0;
+
+  &__content {
+    display: flex;
+    column-gap: 1.2rem;
+
+    @include respond(md-screen) {
+      flex-direction: column;
+      gap: 3.2rem 0;
+    }
+  }
+
+  &__user-info {
+    flex: 1;
+  }
+
+  &__user-orders {
+    flex: 2;
+
+  }
+  
+  .user-orders-card {
+    flex: 0 1 calc(50% - 1.2rem);
+    list-style: none;
+    border: 1px solid var(--color-grey-light-2);
+    border-radius: .5rem;
+    cursor: pointer;
+    
+    @include respond(sm-screen) {
+      flex: 0 1 100%;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      padding: 1.2rem;
+      background-color: var(--color-grey-light-2);
+    }  
+
+    &__body {
+      padding: 1.2rem;
+
+    }
+
+    &__item {
+      font-size: 1.4rem;
+      i {
+        margin-right: .8rem;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: .8rem;
+      }
+
+      .label {
+        font-weight: 600;
+      }
+
+      &--main {
+        font-weight: 600;
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  &__user-orders-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+
 }
 
 .section-checkout {
-  padding: 3.2rem 0
+  padding: 3.2rem 0;
+
+  &__content {
+    display: flex;
+    column-gap: 3.6rem;
+
+    @include respond(md-screen) {
+      flex-direction: column;
+      gap: 3.2rem 0;
+    }
+  }
+
+  &__form {
+    flex: 4;
+
+    &>:not(h3, button) {
+      margin-bottom: 1.2rem;
+    }
+  }
+
+  &__resumen {
+    flex: 6;
+  }
+
+  &__resumen-item {
+    display: flex;
+    justify-content: space-between;
+
+    &--main {
+      font-weight: 600;
+    }
+  }
+
+  &__line {
+    height: 1px;
+    width: 100%;
+    background-color: var(--color-grey-dark-3);
+    margin: 1.2rem 0;
+  }
+
+  &__submit-btn {
+    color: var(--color-grey-light-1);
+    background-color: var(--color-primary-light);
+    transition: color 0.3s, background-color 0.3s;
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-accent-1);
+    }
+  }
 }

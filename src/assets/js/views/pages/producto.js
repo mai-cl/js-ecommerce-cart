@@ -1,4 +1,5 @@
 import { BreadCrumbs } from '../components/BreadCrumbs'
+import InfoText from '../components/InfoText'
 
 import Page from './Page'
 
@@ -43,9 +44,9 @@ class Producto extends Page {
             <h2 class="section-producto__title heading-2">
               ${nombre}
             </h2>
-            <div class="section-producto__stock">${
-              stock ? 'Stock Disponible' : 'Sin Stock'
-            }</div>
+            
+
+            ${stock ? InfoText('success', 'Stock Disponible'): InfoText('danger', 'Sin Stock')}
             <div class="section-producto__price">$${precio}</div>
             <div class="section-producto__areabtn">
               <div class="qty-selector">
@@ -66,7 +67,7 @@ class Producto extends Page {
                   +
                 </button>
               </div>
-              <button class="btn section-producto__btn" data-id="${id}">
+              <button class="btn section-producto__btn" data-id="${id}" ${!stock && 'disabled'}>
                 Sumar al carrito
               </button>
             </div>

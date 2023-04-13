@@ -9,6 +9,12 @@
   &--full-width {
     width: 100%;
   }
+
+  &:disabled, &:disabled:hover {
+    background-color: var(--color-grey-light-4);
+    color: var(--color-grey-light-1);
+    cursor: default;
+  }
 }
 
 // SLIDER PRINCIPAL
@@ -36,6 +42,7 @@
   border-radius: 0.5rem;
   border: 1px solid var(--color-grey-light-4);
   transition: box-shadow 0.3s;
+  position: relative;
 
   &:hover {
     box-shadow: 1px 0px 11px 5px rgba(133, 255, 199, 1);
@@ -46,6 +53,12 @@
       transform: scale(1.05);
       z-index: 0;
     }
+  }
+
+  &__info-text {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.2rem;
   }
 
   &__img {
@@ -318,12 +331,19 @@
   }
 
   &__main-btn {
-    background-color: var(--color-primary);
     color: var(--color-grey-light-1);
+      background-color: var(--color-primary-light);
     text-decoration: none;
     display: inline-block;
     text-align: center;
+    transition: color 0.3s, background-color 0.3s;
+  
+      &:hover {
+        background-color: var(--color-primary);
+        color: var(--color-accent-1);
+      }
   }
+  
 }
 
 .cart-item {
@@ -390,6 +410,7 @@
 .message {
   padding: 8px;
   text-align: center;
+  width: 100%;
 
   &:not(:last-child) {
     margin-bottom: 1px;
@@ -428,4 +449,28 @@
     border: 1px solid var(--color-grey-dark-1);
     padding: 0.4rem 1.2rem;
   }
+}
+
+// INFO TEXT
+
+.info-text {
+    font-weight: 400;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 .8rem;
+    width: fit-content;
+    font-size: 1.4rem;
+    cursor: default;
+
+    &--success {
+      color: var(--color-success);
+      border-color: var(--color-success);
+/*       background-color: transparentize($color: var(--color-success), $amount: 50);
+ */    }
+
+    &--danger {
+      color: var(--color-error);
+      border-color: var(--color-error);
+/*       background-color: transparentize($color: var(--color-error), $amount: 50);
+ */    }
 }

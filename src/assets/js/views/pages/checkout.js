@@ -28,13 +28,13 @@ class Checkout extends Page {
         this._data = cart
         if(this._data.items.length) {
             document.querySelector('.section-checkout__resumen').innerHTML = `
-            <h3>Resumen del pedido</h3>
-            <p>Subtotal: $${this._data.subtotal}</p>
-            <p>Costo de envío: $0</p>
-            <p>Total: $${this._data.subtotal} </p>
+            <h3 class="mb-sm">Resumen del pedido</h3>
+                    <div class="section-checkout__resumen-item"><span class="section-checkout__label">Subtotal:</span> <span>$${this._data.subtotal}</span></div>
+                    <div class="section-checkout__resumen-item"><span class="section-checkout__label">Costo de envío:</span> <span>$0</span></div>
+                    <div class="section-checkout__line"></div>
+                    <div class="section-checkout__resumen-item section-checkout__resumen-item--main"><span class="section-checkout__label">Total:</span> <span>$${this._data.subtotal}</span></div>
             `
         } else {
-            console.log('render message')
             messagesManager.renderMessageOn(
                 document.querySelector('.section-checkout__resumen'),
                 'info',
@@ -74,15 +74,16 @@ class Checkout extends Page {
             <h2 class="heading-2 text-center mb-sm">${this._title}</h2>
             <div class="section-checkout__content">
                 <form class="section-checkout__form" id="checkout-form">
-                    <h3>Ingrese sus datos</h3>
+                    <h3 class="mb-sm">Ingrese sus datos</h3>
                     ${this._inputs.map(input => InputText(input)).join('')}
-                    <button class='btn section-checkout__submit-btn mt-sm' type="submit">Confirmar compra</button>
+                    <button class='btn btn--full-width section-checkout__submit-btn mt-sm' type="submit">Confirmar compra</button>
                 </form>
                 <div class="section-checkout__resumen">
-                    <h3>Resumen del pedido</h3>
-                    <p>Subtotal: $${this._data.subtotal}</p>
-                    <p>Costo de envío: $0</p>
-                    <p>Total: $${this._data.subtotal} </p>
+                    <h3 class="mb-sm">Resumen del pedido</h3>
+                    <div class="section-checkout__resumen-item"><span class="section-checkout__label">Subtotal:</span> <span>$${this._data.subtotal}</span></div>
+                    <div class="section-checkout__resumen-item"><span class="section-checkout__label">Costo de envío:</span> <span>$0</span></div>
+                    <div class="section-checkout__line"></div>
+                    <div class="section-checkout__resumen-item section-checkout__resumen-item--main"><span class="section-checkout__label">Total:</span> <span>$${this._data.subtotal}</span></div>
                 </div>
             </div>
             </div>
