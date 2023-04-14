@@ -131,6 +131,7 @@ function setAppHandlers() {
     cartView.closeCart()
     Router.navigate(location.pathname)
   })
+  headerView.setUIhandlers()
   headerView.addHandler('click', onNavlinkClick)
   headerView.addHandler('submit', onSubmitForm)
 

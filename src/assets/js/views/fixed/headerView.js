@@ -4,7 +4,6 @@ const navContent = document.getElementById('nav-main')
 const openSearchFormBtn = document.querySelector('.header__button--search-resp')
 const closeSearchFormBtn = document.getElementById('close-form-btn')
 const searchSectionResp = document.querySelector('.header__search-section-resp')
-const loginWithGoogleBtn = document.getElementById('login-with-google-btn')
 const headerUserBtn = document.getElementById('header-user-btn')
 
 function addHandler(event, handler) {
@@ -28,17 +27,21 @@ function setUIhandlers() {
     }
   })
 
+  searchSectionResp.addEventListener('transitionend', () => {
+    if (searchSectionResp.classList.contains('show')) {
+      searchSectionResp.querySelector('form .header__searchinput').focus()
+    }
+  })
+
   openSearchFormBtn.addEventListener('click', () => {
     searchSectionResp.classList.add('show')
-    searchSectionResp.querySelector('form .header__searchinput').focus()
   })
 
   closeSearchFormBtn.addEventListener('click', () => {
+    searchSectionResp.querySelector('form .header__searchinput').blur()
     searchSectionResp.classList.remove('show')
   })
 }
-
-setUIhandlers()
 
 function hideResponsiveNav() {
   navContent.classList.remove('open')
@@ -88,6 +91,7 @@ function setLoggedOutUserOptions() {
 }
 
 export default {
+  setUIhandlers,
   addHandler,
   hideResponsiveNav,
   hideSearchBar,

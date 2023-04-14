@@ -60,6 +60,7 @@ body {
   line-height: 1.6;
   color: var(--color-grey-dark-1);
   min-height: 100vh;
+  backface-visibility: hidden;
 }
 
 .container {
@@ -69,9 +70,5 @@ body {
 }
 
 #main {
-  min-height: 33.9rem;
-
-  @include respond(md-screen) {
-    min-height: 37.9rem;
-  }
+  min-height: 35rem;
 }

@@ -10,7 +10,8 @@
     width: 100%;
   }
 
-  &:disabled, &:disabled:hover {
+  &:disabled,
+  &:disabled:hover {
     background-color: var(--color-grey-light-4);
     color: var(--color-grey-light-1);
     cursor: default;
@@ -332,20 +333,20 @@
 
   &__main-btn {
     color: var(--color-grey-light-1);
-      background-color: var(--color-primary-light);
+    background-color: var(--color-primary-light);
     text-decoration: none;
     display: inline-block;
     text-align: center;
     transition: color 0.3s, background-color 0.3s;
-  
-      &:hover {
-        background-color: var(--color-primary);
-        color: var(--color-accent-1);
-      }
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-accent-1);
+    }
   }
-  
 }
 
+// CART ITEM
 .cart-item {
   padding: 1.2rem 0;
   display: flex;
@@ -401,9 +402,13 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  backface-visibility: hidden;
 
   @include respond(md-screen) {
-    top: 8.2rem;
+    /* top: 8.2rem; */
+    position: fixed;
+    width: 100%;
+    top: initial;
   }
 }
 
@@ -433,7 +438,6 @@
 }
 
 // FORM-CONTROL
-
 .form-control {
   display: flex;
   flex-direction: column;
@@ -452,25 +456,22 @@
 }
 
 // INFO TEXT
-
 .info-text {
-    font-weight: 400;
-    border-width: 1px;
-    border-style: solid;
-    padding: 0 .8rem;
-    width: fit-content;
-    font-size: 1.4rem;
-    cursor: default;
+  font-weight: 400;
+  border-width: 1px;
+  border-style: solid;
+  padding: 0 0.8rem;
+  width: fit-content;
+  font-size: 1.4rem;
+  cursor: default;
 
-    &--success {
-      color: var(--color-success);
-      border-color: var(--color-success);
-/*       background-color: transparentize($color: var(--color-success), $amount: 50);
- */    }
+  &--success {
+    color: var(--color-success);
+    border-color: var(--color-success);
+  }
 
-    &--danger {
-      color: var(--color-error);
-      border-color: var(--color-error);
-/*       background-color: transparentize($color: var(--color-error), $amount: 50);
- */    }
+  &--danger {
+    color: var(--color-error);
+    border-color: var(--color-error);
+  }
 }

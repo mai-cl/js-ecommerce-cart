@@ -25,7 +25,11 @@ const onAddToCartBtnClick = async e => {
     const addedItem = model.addToCart()
     cartView.updateCartUI(model.state.cart)
 
-    mainView.renderMessage(TYPE_MESSAGE.SUCCESS, MESSAGE.SUCCESS_ADD_TO_CART)
+    mainView.renderMessage(
+      TYPE_MESSAGE.SUCCESS,
+      MESSAGE.SUCCESS_ADD_TO_CART,
+      true
+    ) //test!!!!
   } catch (error) {
     mainView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
