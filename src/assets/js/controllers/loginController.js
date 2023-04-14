@@ -1,24 +1,9 @@
 import model from '../model'
 import Router from '../router/Router'
 import { MESSAGE, TYPE_MESSAGE } from '../utils/messages'
-import headerView from '../views/fixed/headerView'
+import { getQueryParam } from '../utils/queryParams'
 import mainView from '../views/fixed/mainView'
 import loginPage from '../views/pages/login'
-
-async function onLogoutUser(e) {
-  if (!e.target.matches('#logout-btn')) return
-  mainView.renderBlockingLoaderSpinner()
-  try {
-    await model.logoutUser()
-    Router.updateHistoryStack(`/`)
-    Router.dispatchNavEvent()
-    /* headerView.setLoggedOutUserOptions() */
-  } catch (error) {
-    console.error(error)
-  } finally {
-    mainView.removeLoaderSpinner()
-  }
-}
 
 async function onLoginUser(e) {
   if (!e.target.matches('#login-form')) return
@@ -31,11 +16,18 @@ async function onLoginUser(e) {
     await model.loginWithEmailAndPassword(email, password)
     mainView.removeLoaderSpinner()
 
+    const redirect = getQueryParam('redirect')
+
+    if (redirect) {
+      Router.updateHistoryStack(redirect)
+      Router.dispatchNavEvent()
+      mainView.renderMessage(TYPE_MESSAGE.SUCCESS, MESSAGE.SUCCESS_LOGIN)
+      return
+    }
+
     Router.updateHistoryStack(`/`)
     Router.dispatchNavEvent()
     mainView.renderMessage(TYPE_MESSAGE.SUCCESS, MESSAGE.SUCCESS_LOGIN)
-    /* headerView.setLoggedUserOptions()
-    headerView.addHandler('click', onLogoutUser) */
   } catch (error) {
     mainView.removeLoaderSpinner()
     mainView.renderMessage(TYPE_MESSAGE.ERROR, error.message, true)

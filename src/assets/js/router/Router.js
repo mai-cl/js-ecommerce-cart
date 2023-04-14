@@ -24,6 +24,10 @@ class Router {
     history.pushState({}, '', url)
   }
 
+  replaceHistoryState(url) {
+    history.replaceState({}, '', url)
+  }
+
   setPathParam(paramName, paramValue) {
     this.dynamicParams[paramName] = paramValue
   }

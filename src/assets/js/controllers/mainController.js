@@ -52,7 +52,10 @@ async function onControlInputClick(e) {
     cartView[button.dataset.action](button.dataset.id)
     model.updateItemCartQty(cartView.getInputQty(button.dataset.id))
     cartView.updateCartUI(model.state.cart)
-    if(location.pathname === '/checkout') checkoutPage.updateCheckoutSummary(model.state.cart)
+    if (location.pathname === '/checkout') {
+      mainView.clear()
+      checkoutPage.show(model.getCart())
+    }
   } catch (error) {
     cartView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
@@ -71,7 +74,10 @@ async function onDeleteBtnClick(e) {
     if (!model.state.targetProduct) return
     const deletedItem = model.deleteItemCart(parseInt(button.dataset.id))
     cartView.updateCartUI(model.state.cart)
-    if(location.pathname === '/checkout') checkoutPage.updateCheckoutSummary(model.state.cart)
+    if (location.pathname === '/checkout') {
+      mainView.clear()
+      checkoutPage.show(model.getCart())
+    }
   } catch (error) {
     cartView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
   } finally {
@@ -95,23 +101,26 @@ async function onLogoutUser(e) {
 
 function checkLoginUser() {
   return new Promise((resolve, reject) => {
-    auth.onAuthStateChanged(user => {
-      if(user) {
-        model.state.user = {
-          userId: user.uid,
-          displayName: user.displayName,
-          email: user.email,
+    auth.onAuthStateChanged(
+      user => {
+        if (user) {
+          model.state.user = {
+            userId: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+          }
+          headerView.setLoggedUserOptions()
+          headerView.addHandler('click', onLogoutUser)
+        } else {
+          model.state.user = {}
+          headerView.setLoggedOutUserOptions()
         }
-        headerView.setLoggedUserOptions()
-      headerView.addHandler('click', onLogoutUser)
-      } else {
-        model.state.user = {}
-        headerView.setLoggedOutUserOptions()
+        resolve(user)
+      },
+      err => {
+        reject(err)
       }
-      resolve(user)
-    }, err => {
-      reject(err)
-    })
+    )
   })
 }
 
@@ -131,7 +140,6 @@ function setAppHandlers() {
   cartView.setUIhandlers()
   cartView.addHandler('click', onControlInputClick)
   cartView.addHandler('click', onDeleteBtnClick)
-
 }
 
 function initRouter() {

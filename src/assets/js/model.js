@@ -1,8 +1,6 @@
 import { API_URL } from './config'
 import { abortRequest, getJSON } from './api'
-import {
-  auth,
-} from '../../firebase/firebaseConfig'
+import { auth } from '../../firebase/firebaseConfig'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -66,12 +64,12 @@ function addToCart(qty = 1) {
 }
 
 function clearCart() {
-  state.cart = {
+  ;(state.cart = {
     items: [],
     subtotal: null,
     quantity: null,
-  },
-  saveInLocalSt()
+  }),
+    saveInLocalSt()
 }
 
 function updateItemCartQty(qty) {
@@ -161,7 +159,6 @@ async function loginWithEmailAndPassword(email, password) {
       displayName: userCredential.user.displayName,
       email: userCredential.user.email,
     }
-    console.log(userCredential)
   } catch (error) {
     throw error
   }
@@ -183,22 +180,22 @@ async function registerUser(email, password, name) {
       email,
       password
     )
-    await updateProfile(auth.currentUser, {displayName: name})
+    await updateProfile(auth.currentUser, { displayName: name })
     state.user = {
       userId: userCredential.user.uid,
       displayName: auth.currentUser.displayName,
       email: userCredential.user.email,
     }
-    console.log(userCredential)
   } catch (error) {
     throw error
   }
 }
 
-
 async function getUserOrders() {
   try {
-    const orders = await getJSON(`${API_URL}/compras?userId=${state.user.userId}&_sort=date&_order=desc`)
+    const orders = await getJSON(
+      `${API_URL}/compras?userId=${state.user.userId}&_sort=date&_order=desc`
+    )
     state.orders = orders
   } catch (error) {
     throw error
@@ -209,14 +206,13 @@ function getCart() {
   return JSON.parse(localStorage.getItem('cart'))
 }
 
-async function confirmBuy({name, email, phone}) {
+async function confirmBuy({ userId, name, email, phone }) {
   const cart = JSON.parse(localStorage.getItem('cart')) //{items, subtotal, quantity}
-  const userId = state.user.userId
   const date = new Date()
 
   try {
     const response = await fetch(`${API_URL}/compras`, {
-      headers: new Headers({'content-type': 'application/json'}),
+      headers: new Headers({ 'content-type': 'application/json' }),
       method: 'POST',
       body: JSON.stringify({
         userId: userId,
@@ -225,12 +221,11 @@ async function confirmBuy({name, email, phone}) {
         phone: phone,
         date: date,
         totalCost: cart.subtotal,
-        items: cart.items
-      })
+        items: cart.items,
+      }),
     })
     const data = await response.json()
     return data.id
-    
   } catch (error) {
     throw error
   }
@@ -252,12 +247,12 @@ export default {
   checkEnoughStock,
   loadLocalSt,
   abortIncomingRequest,
-  
+
   registerUser,
   loginWithEmailAndPassword,
   logoutUser,
   getUserOrders,
   getCart,
   confirmBuy,
-  clearCart
+  clearCart,
 }

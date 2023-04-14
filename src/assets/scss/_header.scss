@@ -11,7 +11,7 @@
   &__search-section-resp {
     display: none;
     position: absolute;
-    z-index: 20;
+    z-index: 30;
     top: -100%;
     left: 0;
     width: 100%;
@@ -142,7 +142,7 @@
     &--1 {
       position: relative;
       background-color: var(--color-primary);
-      z-index: 10;
+      z-index: 20;
 
       & > .container {
         display: flex;
@@ -339,6 +339,7 @@
   &__sublist {
     display: none;
     position: absolute;
+    z-index: 30;
     right: 50%;
     top: 100%;
     transform: translateX(50%);

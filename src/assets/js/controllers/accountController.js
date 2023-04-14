@@ -1,10 +1,21 @@
+import { auth } from '../../../firebase/firebaseConfig'
 import model from '../model'
+import Router from '../router/Router'
 import { MESSAGE, TYPE_MESSAGE } from '../utils/messages'
 import mainView from '../views/fixed/mainView'
 import accountPage from '../views/pages/account'
 
 export const account = async () => {
+  model.abortIncomingRequest()
   mainView.removeMessage()
+  mainView.clear()
+
+  if (!auth.currentUser) {
+    // redirect to login
+    Router.replaceHistoryState('/login?redirect=/account')
+    Router.dispatchNavEvent()
+    return
+  }
 
   mainView.renderLoaderSpinner()
 
