@@ -8,6 +8,7 @@ import { MESSAGE, TYPE_MESSAGE } from '../utils/messages'
 import mainView from '../views/fixed/mainView'
 import checkoutPage from '../views/pages/checkout'
 import { auth } from '../../../firebase/firebaseConfig'
+import { checkout } from './checkoutController'
 
 function onNavlinkClick(e) {
   const anchor = e.target.closest('a')
@@ -53,8 +54,7 @@ async function onControlInputClick(e) {
     model.updateItemCartQty(cartView.getInputQty(button.dataset.id))
     cartView.updateCartUI(model.state.cart)
     if (location.pathname === '/checkout') {
-      mainView.clear()
-      checkoutPage.show(model.getCart())
+      checkout()
     }
   } catch (error) {
     cartView.renderMessage(TYPE_MESSAGE.ERROR, error.message)
@@ -75,8 +75,7 @@ async function onDeleteBtnClick(e) {
     const deletedItem = model.deleteItemCart(parseInt(button.dataset.id))
     cartView.updateCartUI(model.state.cart)
     if (location.pathname === '/checkout') {
-      mainView.clear()
-      checkoutPage.show(model.getCart())
+      checkout()
     }
   } catch (error) {
     cartView.renderMessage(TYPE_MESSAGE.ERROR, error.message)

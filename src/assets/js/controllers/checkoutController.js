@@ -37,10 +37,6 @@ async function onSubmitOrder(e) {
   }
 }
 
-export const syncWithCartUpdates = () => {
-  checkoutPage.updateCheckoutSummary(model.getCart())
-}
-
 export const checkout = () => {
   model.abortIncomingRequest()
   mainView.removeMessage()
