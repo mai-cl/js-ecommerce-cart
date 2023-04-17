@@ -1,3 +1,6 @@
+import bannerImg1 from '../img/banner-1.jpg'
+import bannerImg2 from '../img/banner-2.jpg'
+import bannerImg3 from '../img/banner-3.jpg'
 import { API_URL } from './config'
 import { abortRequest, getJSON } from './api'
 import { auth } from '../../firebase/firebaseConfig'
@@ -231,8 +234,26 @@ async function confirmBuy({ userId, name, email, phone }) {
   }
 }
 
+function getBannerData() {
+  return [
+    {
+      urlImg: bannerImg1,
+      path: '/search?query=amd%20ryzen',
+    },
+    {
+      urlImg: bannerImg2,
+      path: '/search?query=intel',
+    },
+    {
+      urlImg: bannerImg3,
+      path: '/search?query=msi',
+    },
+  ]
+}
+
 export default {
   state,
+  getBannerData,
   getItemQtyInCart,
   getCategories,
   getCategoryByPathname,

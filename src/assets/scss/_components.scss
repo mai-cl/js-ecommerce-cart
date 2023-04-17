@@ -19,13 +19,20 @@
 }
 
 // SLIDER PRINCIPAL
-.slider {
-  height: 42rem;
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.slider-section {
+  background-color: #000;
+
+  &__slider {
+    height: 42rem;
+    max-width: 192rem;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      user-select: none;
+    }
   }
 }
 

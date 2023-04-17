@@ -28,6 +28,7 @@
     "core-js": "^3.19.1",
     "firebase": "^9.19.0",
     "normalize.css": "^8.0.1",
-    "regenerator-runtime": "^0.13.9"
+    "regenerator-runtime": "^0.13.9",
+    "swiper": "^9.2.2"
   }
 }

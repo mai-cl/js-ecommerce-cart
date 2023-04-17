@@ -24,7 +24,6 @@ async function onSubmitOrder(e) {
       email,
     })
     mainView.removeLoaderSpinner()
-    console.log(`compra ${orderId} OK`)
 
     model.clearCart()
     cartView.updateCartUI(model.state.cart)
@@ -48,7 +47,6 @@ export const checkout = () => {
   mainView.clear()
 
   if (!auth.currentUser) {
-    // redirect to login
     Router.replaceHistoryState('/login?redirect=/checkout')
     Router.dispatchNavEvent()
     return

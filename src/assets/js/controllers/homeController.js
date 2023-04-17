@@ -37,7 +37,11 @@ export const home = async () => {
   try {
     await model.getProducts()
 
-    homePage.show(model.state.products)
+    homePage.show({
+      products: model.state.products,
+      bannerData: model.getBannerData(),
+    })
+    homePage.initCarousel()
 
     homePage.addHandler('click', onAddToCartBtnClick)
     mainView.removeLoaderSpinner()
