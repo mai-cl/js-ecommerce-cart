@@ -5,6 +5,7 @@ const openSearchFormBtn = document.querySelector('.header__button--search-resp')
 const closeSearchFormBtn = document.getElementById('close-form-btn')
 const searchSectionResp = document.querySelector('.header__search-section-resp')
 const headerUserBtn = document.getElementById('header-user-btn')
+const userOptionsMdScreen = document.getElementById('user-options-md-screen')
 
 function addHandler(event, handler) {
   document.querySelector('header').addEventListener(event, handler)
@@ -67,6 +68,11 @@ function setLoggedUserOptions() {
 </ul>
   `
   )
+  userOptionsMdScreen.innerHTML = `
+    <i class="far fa-user user-icon"></i>
+    <a class="user-link" href="/account">Mi cuenta</a>
+    <span class="user-btn" id='logout-btn-md-screen'>Cerrar sesión</span>
+  `
 }
 
 function setLoggedOutUserOptions() {
@@ -88,6 +94,11 @@ function setLoggedOutUserOptions() {
     </ul>
   `
   )
+  userOptionsMdScreen.innerHTML = `
+    <i class="far fa-user user-icon"></i>
+    <a class="user-link" href="/login">Iniciar sesión</a>
+    <a class="user-link" href="/register">Crear cuenta</a>
+  `
 }
 
 export default {

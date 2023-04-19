@@ -59,7 +59,10 @@
             <button class="btn header__button header__button--search-resp">
               <i class="fas fa-search"></i>
             </button>
-            <button class="btn header__button" id="header-user-btn">
+            <button
+              class="btn header__button header__button--user"
+              id="header-user-btn"
+            >
               <i class="far fa-user"></i>
               <ul class="header__sublist">
                 <li class="header__sublist-item">
@@ -83,6 +86,14 @@
 
       <section class="header__section header__section--2" id="nav-section">
         <nav class="header__nav container" id="nav-main">
+          <div
+            class="header__user-options-md-screen"
+            id="user-options-md-screen"
+          >
+            <i class="far fa-user user-icon"></i>
+            <a class="user-link" href="/login">Iniciar sesión</a>
+            <a class="user-link" href="/register">Crear cuenta</a>
+          </div>
           <ul class="header__navlist">
             <li class="header__navitem">
               <a href="/productos/procesadores" class="header__navlink">

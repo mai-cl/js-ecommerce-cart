@@ -167,13 +167,47 @@
     transform: translateY(-50%);
   }
 
+  &__user-options-md-screen {
+    display: none;
+    padding: 2.4rem 0;
+    border-bottom: 1px solid var(--color-grey-light-1);
+
+    .user-icon {
+      font-size: 2.4rem;
+      color: var(--color-grey-light-1);
+    }
+
+    .user-link,
+    .user-link:visited,
+    .user-btn {
+      padding: 1.2rem 0;
+      text-decoration: none;
+      color: var(--color-grey-light-1);
+      font-size: 1.8rem;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .user-link:hover,
+    .user-btn:hover {
+      color: var(--color-accent-1);
+    }
+
+    @include respond(md-screen) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 2.4rem;
+    }
+  }
+
   &__nav {
     width: 100%;
 
     @include respond(md-screen) {
       position: fixed;
       width: 100%;
-      top: 0;
+      top: 8.2rem;
       right: 100%;
       bottom: 0;
       background-color: var(--color-primary-dark);
@@ -247,7 +281,7 @@
 
     @include respond(md-screen) {
       margin-left: auto;
-      gap: 1.6rem;
+      gap: 2rem;
     }
   }
 
@@ -277,6 +311,12 @@
 
       @include respond(md-screen) {
         display: block;
+      }
+    }
+
+    &--user {
+      @include respond(md-screen) {
+        display: none;
       }
     }
   }

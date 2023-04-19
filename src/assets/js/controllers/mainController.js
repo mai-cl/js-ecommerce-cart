@@ -6,7 +6,6 @@ import { routes } from '../router/routes'
 import Router from '../router/Router'
 import { MESSAGE, TYPE_MESSAGE } from '../utils/messages'
 import mainView from '../views/fixed/mainView'
-import checkoutPage from '../views/pages/checkout'
 import { auth } from '../../../firebase/firebaseConfig'
 import { checkout } from './checkoutController'
 
@@ -85,7 +84,7 @@ async function onDeleteBtnClick(e) {
 }
 
 async function onLogoutUser(e) {
-  if (!e.target.matches('#logout-btn')) return
+  if (!e.target.matches('#logout-btn, #logout-btn-md-screen')) return
   mainView.renderBlockingLoaderSpinner()
   try {
     await model.logoutUser()
